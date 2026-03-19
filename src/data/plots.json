@@ -1,0 +1,18 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      },
+      "properties": {
+        "id": "plot-1",
+        "status": "available",
+        "price": 50000,
+        "panoramaUrl": "/assets/360/plot-1.jpg"
+      }
+    }
+  ]
+}
