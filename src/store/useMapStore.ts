@@ -15,6 +15,8 @@ export interface SelectedPlot {
 }
 
 interface MapState {
+  isAppLoading: boolean;
+  setAppLoading: (loading: boolean) => void;
   activePlotId: string | null;
   setActivePlot: (id: string | null) => void;
   isViewerOpen: boolean;
@@ -51,6 +53,8 @@ interface MapState {
 }
 
 export const useMapStore = create<MapState>((set) => ({
+  isAppLoading: true,
+  setAppLoading: (loading) => set({ isAppLoading: loading }),
   activePlotId: null,
   setActivePlot: (id) => set({ activePlotId: id }),
   isViewerOpen: false,

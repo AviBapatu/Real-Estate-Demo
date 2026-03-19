@@ -58,6 +58,7 @@ const MAP_BOUNDS = [
 export const MapView = () => {
   const mapRef = useRef<MapRef>(null);
   const { onMouseMove, onMouseLeave, handleMapClick } = useMapEngine(mapRef);
+  const setAppLoading = useMapStore((state) => state.setAppLoading);
 
   return (
     <Map
@@ -73,7 +74,10 @@ export const MapView = () => {
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       // Re-trigger feature state sync once the canvas + sources are ready
-      onLoad={() => useMapStore.setState({ searchQuery: '' })}
+      onLoad={() => {
+        useMapStore.setState({ searchQuery: '' });
+        setTimeout(() => setAppLoading(false), 500);
+      }}
     >
       <MapLayers
         imageBounds={imageBounds}
