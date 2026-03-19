@@ -56,7 +56,10 @@ export const Navbar = () => {
           
           <select 
             value={searchFilter}
-            onChange={(e) => setSearchFilter(e.target.value)}
+            onChange={(e) => {
+              setSearchFilter(e.target.value);
+              setSearchQuery('');
+            }}
             style={{
               border: 'none',
               background: 'transparent',
@@ -77,10 +80,16 @@ export const Navbar = () => {
           </select>
 
           <input 
-            type="text" 
+            type={searchFilter === 'size' ? 'number' : 'text'}
             placeholder={getPlaceholderText()} 
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              let val = e.target.value;
+              if (searchFilter === 'features') {
+                val = val.replace(/[0-9]/g, '');
+              }
+              setSearchQuery(val);
+            }}
             style={{
               flex: 1,
               border: 'none',
@@ -91,6 +100,27 @@ export const Navbar = () => {
               color: '#111827'
             }}
           />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '0 16px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#9ca3af',
+              }}
+              aria-label="Clear search"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          )}
         </div>
       </div>
 

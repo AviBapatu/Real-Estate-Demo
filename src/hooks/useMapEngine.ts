@@ -20,6 +20,11 @@ export const useMapEngine = (mapRef: React.RefObject<MapRef | null>) => {
   const {
     searchQuery,
     searchFilter,
+    filterMinSize,
+    filterMaxSize,
+    filterMinPrice,
+    filterMaxPrice,
+    filterFeatures,
     setActivePlot,
     setSelectedPlot,
   } = useMapStore();
@@ -32,18 +37,46 @@ export const useMapEngine = (mapRef: React.RefObject<MapRef | null>) => {
     if (!map || !map.isStyleLoaded() || !map.getSource('plots-source')) return;
 
     const query = searchQuery.toLowerCase().trim();
+    const isAnyFilterActive = !!query || !!filterMinSize || !!filterMaxSize || !!filterMinPrice || !!filterMaxPrice || filterFeatures.length > 0;
 
     const matchedFeatures = plotData.features.filter((feature) => {
       const props = feature.properties as any;
-      if (!query) return true;
+      
+      // 1. Navbar Search Query
+      if (query) {
+        let matchQuery = false;
+        if (searchFilter === 'id' && props.id) matchQuery = props.id.toLowerCase().includes(query);
+        else if (searchFilter === 'size' && props.size) matchQuery = props.size.toLowerCase().includes(query);
+        else if (searchFilter === 'features' && props.features) matchQuery = props.features.some((f: string) => f.toLowerCase().includes(query));
+        if (!matchQuery) return false;
+      }
 
-      if (searchFilter === 'id' && props.id)
-        return props.id.toLowerCase().includes(query);
-      if (searchFilter === 'size' && props.size)
-        return props.size.toLowerCase().includes(query);
-      if (searchFilter === 'features' && props.features)
-        return props.features.some((f: string) => f.toLowerCase().includes(query));
-      return false;
+      // 2. Size Range Filter
+      if (filterMinSize || filterMaxSize) {
+        const sizeVal = parseFloat(props.size);
+        if (!isNaN(sizeVal)) {
+          if (filterMinSize && sizeVal < parseFloat(filterMinSize)) return false;
+          if (filterMaxSize && sizeVal > parseFloat(filterMaxSize)) return false;
+        }
+      }
+
+      // 3. Price Range Filter
+      if (filterMinPrice || filterMaxPrice) {
+        const priceVal = props.price;
+        if (typeof priceVal === 'number') {
+          if (filterMinPrice && priceVal < parseFloat(filterMinPrice)) return false;
+          if (filterMaxPrice && priceVal > parseFloat(filterMaxPrice)) return false;
+        }
+      }
+
+      // 4. Features Filter (Plot must have ALL selected features)
+      if (filterFeatures.length > 0) {
+        if (!props.features || !Array.isArray(props.features)) return false;
+        const hasAll = filterFeatures.every(ff => props.features.includes(ff));
+        if (!hasAll) return false;
+      }
+
+      return true;
     });
 
     const matchedIds = new Set(matchedFeatures.map((f) => (f.properties as any).id));
@@ -53,7 +86,7 @@ export const useMapEngine = (mapRef: React.RefObject<MapRef | null>) => {
       const id = (feature.properties as any).id;
       map.setFeatureState(
         { source: 'plots-source', id },
-        { isMatched: !query || matchedIds.has(id) }
+        { isMatched: !isAnyFilterActive || matchedIds.has(id) }
       );
     });
 
@@ -61,7 +94,7 @@ export const useMapEngine = (mapRef: React.RefObject<MapRef | null>) => {
     if (query && matchedFeatures.length === 1) {
       fitBoundsToFeature(map, matchedFeatures[0].geometry.coordinates[0]);
     }
-  }, [searchQuery, searchFilter, mapRef]);
+  }, [searchQuery, searchFilter, filterMinSize, filterMaxSize, filterMinPrice, filterMaxPrice, filterFeatures, mapRef]);
 
   // ─── Hover ────────────────────────────────────────────────────────────────
   const onMouseMove = useCallback((e: MapLayerMouseEvent) => {

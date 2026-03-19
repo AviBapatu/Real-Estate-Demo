@@ -28,6 +28,20 @@ interface MapState {
   selectedPlot: SelectedPlot | null;
   setSelectedPlot: (plot: SelectedPlot | null) => void;
 
+  // Left Sidebar State
+  isLeftSidebarOpen: boolean;
+  setLeftSidebarOpen: (isOpen: boolean) => void;
+  filterMinSize: string;
+  setFilterMinSize: (val: string) => void;
+  filterMaxSize: string;
+  setFilterMaxSize: (val: string) => void;
+  filterMinPrice: string;
+  setFilterMinPrice: (val: string) => void;
+  filterMaxPrice: string;
+  setFilterMaxPrice: (val: string) => void;
+  filterFeatures: string[];
+  setFilterFeature: (feature: string, enabled: boolean) => void;
+
   // Admin mode
   isAdminMode: boolean;
   setAdminMode: (val: boolean) => void;
@@ -47,6 +61,29 @@ export const useMapStore = create<MapState>((set) => ({
   // Sidebar state
   selectedPlot: null,
   setSelectedPlot: (plot) => set({ selectedPlot: plot }),
+
+  // Left Sidebar state
+  isLeftSidebarOpen: true, // open by default initially
+  setLeftSidebarOpen: (isOpen) => set({ isLeftSidebarOpen: isOpen }),
+  filterMinSize: '',
+  setFilterMinSize: (val) => set({ filterMinSize: val }),
+  filterMaxSize: '',
+  setFilterMaxSize: (val) => set({ filterMaxSize: val }),
+  filterMinPrice: '',
+  setFilterMinPrice: (val) => set({ filterMinPrice: val }),
+  filterMaxPrice: '',
+  setFilterMaxPrice: (val) => set({ filterMaxPrice: val }),
+  filterFeatures: [],
+  setFilterFeature: (feature, enabled) => set((state) => {
+    if (enabled) {
+      if (!state.filterFeatures.includes(feature)) {
+        return { filterFeatures: [...state.filterFeatures, feature] };
+      }
+    } else {
+      return { filterFeatures: state.filterFeatures.filter((f) => f !== feature) };
+    }
+    return state;
+  }),
 
   // Admin mode
   isAdminMode: false,

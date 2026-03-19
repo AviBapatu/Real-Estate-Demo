@@ -17,17 +17,22 @@ const plotsFillStyle: Omit<FillLayerSpecification, 'source'> = {
   type: 'fill',
   paint: {
     'fill-color': [
-      'match',
-      ['get', 'status'],
-      'sold', '#ef4444',
-      '#22c55e', // default: available
+      'case',
+      ['boolean', ['feature-state', 'isMatched'], true],
+      [
+        'match',
+        ['get', 'status'],
+        'sold', '#ef4444',
+        '#22c55e', // default: available
+      ],
+      '#9ca3af', // Unmatched features become gray
     ],
     'fill-color-transition': { duration: 300 },
     'fill-opacity': [
       'case',
-      ['boolean', ['feature-state', 'hover'], false], 0.6,
-      ['boolean', ['feature-state', 'isMatched'], true], 0.4,
-      0.02, // faded out when unmatched
+      ['boolean', ['feature-state', 'hover'], false], 0.7,
+      ['boolean', ['feature-state', 'isMatched'], true], 0.5,
+      0.15, // faded out when unmatched
     ],
     'fill-opacity-transition': { duration: 300 },
   },
@@ -37,14 +42,23 @@ const plotsLineStyle: Omit<LineLayerSpecification, 'source'> = {
   id: 'plots-line-layer',
   type: 'line',
   paint: {
-    'line-color': '#ffffff',
+    'line-color': [
+      'case',
+      ['boolean', ['feature-state', 'isMatched'], true], '#ffffff',
+      '#6b7280', // grey outline for unmatched
+    ],
     'line-opacity': [
       'case',
       ['boolean', ['feature-state', 'isMatched'], true], 1.0,
-      0.1,
+      0.3, // Dim outline when unmatched
     ],
     'line-opacity-transition': { duration: 300 },
-    'line-width': 2,
+    'line-width': [
+      'case',
+      ['boolean', ['feature-state', 'hover'], false], 3,
+      ['boolean', ['feature-state', 'isMatched'], true], 2,
+      1,
+    ],
   },
 };
 
