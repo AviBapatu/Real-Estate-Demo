@@ -5,13 +5,60 @@
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
-        "coordinates": []
+        "coordinates": [
+          [
+            [0.18, 0.13],
+            [0.22, 0.13],
+            [0.22, 0.17],
+            [0.18, 0.17],
+            [0.18, 0.13]
+          ]
+        ]
       },
       "properties": {
-        "id": "plot-1",
+        "id": "test-plot-1",
         "status": "available",
-        "price": 50000,
-        "panoramaUrl": "/assets/360/plot-1.jpg"
+        "price": 50000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [0.23, 0.13],
+            [0.27, 0.13],
+            [0.27, 0.17],
+            [0.23, 0.17],
+            [0.23, 0.13]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "test-plot-2",
+        "status": "sold",
+        "price": 55000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [0.18, 0.08],
+            [0.22, 0.08],
+            [0.22, 0.12],
+            [0.18, 0.12],
+            [0.18, 0.08]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "test-plot-3",
+        "status": "available",
+        "price": 48000
       }
     }
   ]
