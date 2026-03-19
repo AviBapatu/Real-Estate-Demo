@@ -28,16 +28,34 @@ export const Navbar = () => {
     }}>
       
       {/* Brand */}
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-        <h1 style={{ 
-          margin: 0, 
-          fontSize: '1.125rem', 
-          color: '#111827', // Near-black for high contrast
-          fontWeight: 700,
-          letterSpacing: '-0.025em'
-        }}>
-          almostworks!
-        </h1>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <img 
+          src="/assets/logo.jpeg" 
+          alt="Greenkrt Logo" 
+          style={{ height: '40px', width: 'auto', borderRadius: '4px' }} 
+        />
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <h1 style={{ 
+            margin: 0, 
+            fontSize: '1.25rem', 
+            color: '#577c1a',
+            fontWeight: 800,
+            lineHeight: '1.2',
+            letterSpacing: '-0.025em'
+          }}>
+            Greenkrt
+          </h1>
+          <span style={{
+            fontSize: '0.7rem',
+            color: '#577c1a',
+            fontWeight: 600,
+            lineHeight: '1',
+            letterSpacing: '0.05em',
+            textTransform: 'uppercase'
+          }}>
+            integrated services pvt. ltd.
+          </span>
+        </div>
       </div>
 
       {/* Unified Search Component */}

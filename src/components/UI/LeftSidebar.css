@@ -136,6 +136,7 @@
   flex: 1;
   width: 0; /* allows flex to shrink it properly */
   padding: 8px 10px;
+  background-color: #ffffff;
   border: 1px solid #d1d5db;
   border-radius: 6px;
   font-size: 0.875rem;
@@ -145,8 +146,8 @@
 }
 
 .left-sidebar__input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+  border-color: #577c1a;
+  box-shadow: 0 0 0 2px rgba(87, 124, 26, 0.1);
 }
 
 .left-sidebar__separator {
@@ -173,8 +174,9 @@
   height: 16px;
   border-radius: 4px;
   border: 1px solid #d1d5db;
+  background-color: #ffffff;
   cursor: pointer;
-  accent-color: #3b82f6;
+  accent-color: #577c1a;
 }
 
 .left-sidebar__feature-text {

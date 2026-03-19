@@ -83,7 +83,7 @@
   margin: 0;
   font-size: 20px;
   font-weight: 600;
-  color: #2563eb;
+  color: #577c1a;
 }
 
 /* ── Divider ─────────────────────────────────────────────────── */
@@ -177,7 +177,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #2563eb;
+  background: #577c1a;
   flex-shrink: 0;
 }
 
@@ -199,7 +199,7 @@
   padding: 14px;
   border: none;
   border-radius: 10px;
-  background: #2563eb;
+  background: #577c1a;
   color: #fff;
   font-size: 15px;
   font-weight: 700;
@@ -209,7 +209,7 @@
 }
 
 .sidebar__cta:hover {
-  background: #1d4ed8;
+  background: #436114;
 }
 
 .sidebar__cta:active {
