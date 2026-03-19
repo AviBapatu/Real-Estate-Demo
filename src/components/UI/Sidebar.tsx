@@ -2,7 +2,12 @@ import { useMapStore } from '../../store/useMapStore';
 import './Sidebar.css';
 
 export const Sidebar = () => {
-  const { selectedPlot, setSelectedPlot } = useMapStore();
+  const { 
+    selectedPlot, 
+    setSelectedPlot,
+    setViewerImageUrl,
+    setViewerOpen
+  } = useMapStore();
 
   const isOpen = selectedPlot !== null;
   const props = selectedPlot?.properties;
@@ -75,11 +80,23 @@ export const Sidebar = () => {
         </section>
       </div>
 
-      {props?.status === 'available' && (
+      {(props?.status === 'available' || props?.panorama) && (
         <div className="sidebar__footer">
-          <button className="sidebar__cta">
-            Express Interest
-          </button>
+          {props?.panorama ? (
+            <button 
+              className="sidebar__cta"
+              onClick={() => {
+                setViewerImageUrl(props.panorama ?? null);
+                setViewerOpen(true);
+              }}
+            >
+              Open 360 View
+            </button>
+          ) : (
+            <button className="sidebar__cta">
+              Express Interest
+            </button>
+          )}
         </div>
       )}
     </aside>

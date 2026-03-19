@@ -2,6 +2,7 @@ import { MapView } from './components/Map/MapView';
 import { Navbar } from './components/UI/Navbar';
 import { Sidebar } from './components/UI/Sidebar';
 import { LeftSidebar } from './components/UI/LeftSidebar';
+import { PanoramaViewer } from './components/Viewer/PanoramaViewer';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <LeftSidebar />
       <MapView />
       <Sidebar />
+      <PanoramaViewer />
     </div>
   );
 }

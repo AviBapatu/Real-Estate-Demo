@@ -79,6 +79,7 @@
         "status": "available",
         "price": 72000,
         "size": "1200 sqft",
+        "panorama": "/assets/360/sample9.jpg",
         "features": [
           "near-entry",
           "corner"
@@ -151,6 +152,7 @@
         "status": "sold",
         "price": 74000,
         "size": "2700 sqft",
+        "panorama": "/assets/360/sample2.png",
         "features": [
           "park-facing",
           "premium-view",
@@ -238,7 +240,8 @@
         "size": "2500 sqft",
         "features": [
           "corner"
-        ]
+        ],
+        "panorama": "/assets/360/sample8.jpg"
       }
     },
     {
@@ -319,7 +322,8 @@
           "corner",
           "east-facing",
           "near-entry"
-        ]
+        ],
+        "panorama": "/assets/360/sample11.jpg"
       }
     },
     {
@@ -398,7 +402,8 @@
         "size": "2700 sqft",
         "features": [
           "park-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample1.jpg"
       }
     },
     {
@@ -482,7 +487,8 @@
         "features": [
           "premium-view",
           "near-entry"
-        ]
+        ],
+        "panorama": "/assets/360/sample6.jpg"
       }
     },
     {
@@ -590,7 +596,8 @@
         "features": [
           "corner",
           "premium-view"
-        ]
+        ],
+        "panorama": "/assets/360/sample10.jpg"
       }
     },
     {
@@ -699,7 +706,8 @@
           "east-facing",
           "near-entry",
           "park-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample9.jpg"
       }
     },
     {
@@ -810,7 +818,8 @@
         "size": "1900 sqft",
         "features": [
           "premium-view"
-        ]
+        ],
+        "panorama": "/assets/360/sample10.jpg"
       }
     },
     {
@@ -901,7 +910,8 @@
         "size": "1600 sqft",
         "features": [
           "near-entry"
-        ]
+        ],
+        "panorama": "/assets/360/sample6.jpg"
       }
     },
     {
@@ -1016,7 +1026,8 @@
         "size": "2600 sqft",
         "features": [
           "premium-view"
-        ]
+        ],
+        "panorama": "/assets/360/sample11.jpg"
       }
     },
     {
@@ -1084,7 +1095,8 @@
         "features": [
           "park-facing",
           "corner"
-        ]
+        ],
+        "panorama": "/assets/360/sample5.jpg"
       }
     },
     {
@@ -1125,7 +1137,8 @@
           "park-facing",
           "premium-view",
           "corner"
-        ]
+        ],
+        "panorama": "/assets/360/sample10.jpg"
       }
     },
     {
@@ -1198,7 +1211,8 @@
           "park-facing",
           "premium-view",
           "near-entry"
-        ]
+        ],
+        "panorama": "/assets/360/sample6.jpg"
       }
     },
     {
@@ -1307,7 +1321,8 @@
           "park-facing",
           "near-entry",
           "east-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample5.jpg"
       }
     },
     {
@@ -1410,7 +1425,8 @@
         "size": "1600 sqft",
         "features": [
           "east-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample9.jpg"
       }
     },
     {
@@ -1514,7 +1530,8 @@
         "features": [
           "park-facing",
           "near-entry"
-        ]
+        ],
+        "panorama": "/assets/360/sample13.jpg"
       }
     },
     {
@@ -1614,7 +1631,8 @@
         "features": [
           "park-facing",
           "east-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample9.jpg"
       }
     },
     {
@@ -1658,7 +1676,8 @@
         "features": [
           "premium-view",
           "east-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample6.jpg"
       }
     },
     {
@@ -1721,7 +1740,8 @@
         "size": "2800 sqft",
         "features": [
           "east-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample5.jpg"
       }
     },
     {
@@ -1814,7 +1834,8 @@
           "east-facing",
           "park-facing",
           "corner"
-        ]
+        ],
+        "panorama": "/assets/360/sample9.jpg"
       }
     },
     {
@@ -1925,7 +1946,8 @@
         "size": "2700 sqft",
         "features": [
           "near-entry"
-        ]
+        ],
+        "panorama": "/assets/360/sample7.jpg"
       }
     },
     {
@@ -2025,7 +2047,8 @@
         "features": [
           "corner",
           "park-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample1.jpg"
       }
     },
     {
@@ -2101,7 +2124,8 @@
         "features": [
           "premium-view",
           "east-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample4.jpg"
       }
     },
     {
@@ -2142,7 +2166,8 @@
           "near-entry",
           "premium-view",
           "corner"
-        ]
+        ],
+        "panorama": "/assets/360/sample9.jpg"
       }
     },
     {
@@ -2185,7 +2210,8 @@
         "size": "2600 sqft",
         "features": [
           "east-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample6.jpg"
       }
     },
     {
@@ -2226,7 +2252,8 @@
           "premium-view",
           "near-entry",
           "east-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample13.jpg"
       }
     },
     {
@@ -2266,7 +2293,8 @@
         "features": [
           "park-facing",
           "near-entry"
-        ]
+        ],
+        "panorama": "/assets/360/sample3.jpg"
       }
     },
     {
@@ -2306,7 +2334,8 @@
         "features": [
           "east-facing",
           "park-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample2.png"
       }
     },
     {
@@ -2347,7 +2376,8 @@
           "near-entry",
           "corner",
           "park-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample12.jpg"
       }
     },
     {
@@ -2386,7 +2416,8 @@
         "size": "2100 sqft",
         "features": [
           "park-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample5.jpg"
       }
     },
     {
@@ -2439,7 +2470,8 @@
           "east-facing",
           "premium-view",
           "near-entry"
-        ]
+        ],
+        "panorama": "/assets/360/sample5.jpg"
       }
     },
     {
@@ -2483,7 +2515,8 @@
         "features": [
           "premium-view",
           "corner"
-        ]
+        ],
+        "panorama": "/assets/360/sample6.jpg"
       }
     },
     {
@@ -2584,7 +2617,8 @@
           "premium-view",
           "near-entry",
           "east-facing"
-        ]
+        ],
+        "panorama": "/assets/360/sample7.jpg"
       }
     }
   ]

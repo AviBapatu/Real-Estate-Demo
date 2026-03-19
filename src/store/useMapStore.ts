@@ -6,6 +6,7 @@ export interface PlotProperties {
   price: number;
   size: string;
   features: string[];
+  panorama?: string;
 }
 
 export interface SelectedPlot {
@@ -18,6 +19,8 @@ interface MapState {
   setActivePlot: (id: string | null) => void;
   isViewerOpen: boolean;
   setViewerOpen: (isOpen: boolean) => void;
+  viewerImageUrl: string | null;
+  setViewerImageUrl: (url: string | null) => void;
 
   searchQuery: string;
   setSearchQuery: (query: string) => void;
@@ -52,6 +55,8 @@ export const useMapStore = create<MapState>((set) => ({
   setActivePlot: (id) => set({ activePlotId: id }),
   isViewerOpen: false,
   setViewerOpen: (isOpen) => set({ isViewerOpen: isOpen }),
+  viewerImageUrl: null,
+  setViewerImageUrl: (url) => set({ viewerImageUrl: url }),
 
   searchQuery: '',
   setSearchQuery: (query) => set({ searchQuery: query }),
