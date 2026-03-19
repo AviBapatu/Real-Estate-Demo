@@ -1,10 +1,12 @@
 import { MapView } from './components/Map/MapView';
+import { Navbar } from './components/UI/Navbar';
 
 function App() {
   return (
-    <main style={{ width: '100%', height: '100%' }}>
+    <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
+      <Navbar />
       <MapView />
-    </main>
+    </div>
   );
 }
 

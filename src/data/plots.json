@@ -16,9 +16,11 @@
         ]
       },
       "properties": {
-        "id": "test-plot-1",
+        "id": "A-101",
         "status": "available",
-        "price": 50000
+        "price": 50000,
+        "size": "1200 sqft",
+        "features": ["corner", "park-facing"]
       }
     },
     {
@@ -38,7 +40,9 @@
       "properties": {
         "id": "test-plot-2",
         "status": "sold",
-        "price": 55000
+        "price": 55000,
+        "size": "1500 sqft",
+        "features": ["main-road"]
       }
     },
     {
@@ -58,7 +62,9 @@
       "properties": {
         "id": "test-plot-3",
         "status": "available",
-        "price": 48000
+        "price": 48000,
+        "size": "1100 sqft",
+        "features": ["corner"]
       }
     }
   ]

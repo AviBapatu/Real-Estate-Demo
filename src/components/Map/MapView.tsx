@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import Map, { Source, Layer } from 'react-map-gl/maplibre';
 import type { MapRef, MapLayerMouseEvent } from 'react-map-gl/maplibre';
 import { calculateImageBounds } from '../../utils/coordinateMath';
@@ -13,8 +13,39 @@ const imageBounds = calculateImageBounds(IMAGE_WIDTH, IMAGE_HEIGHT);
 export const MapView = () => {
   const mapRef = useRef<MapRef>(null);
   const hoveredPolygonId = useRef<string | null>(null);
-  
-  const setActivePlot = useMapStore((state) => state.setActivePlot);
+  // 1. Subscribe to the global search state
+  const { setActivePlot, searchQuery, searchFilter } = useMapStore();
+
+  // THE FIX: Push search state directly to WebGL memory
+  useEffect(() => {
+    const map = mapRef.current?.getMap();
+    if (!map || !map.isStyleLoaded()) return;
+
+    const query = searchQuery.toLowerCase().trim();
+
+    // Loop through all features in our static database
+    plotData.features.forEach((feature) => {
+      const props = feature.properties as any;
+      let isMatched = true; // Default to true so everything shows when search is empty
+
+      if (query) {
+        isMatched = false; // Assume false until proven otherwise
+        if (searchFilter === 'id' && props.id) {
+          isMatched = props.id.toLowerCase().includes(query);
+        } else if (searchFilter === 'size' && props.size) {
+          isMatched = props.size.toLowerCase().includes(query);
+        } else if (searchFilter === 'features' && props.features) {
+          isMatched = props.features.some((f: string) => f.toLowerCase().includes(query));
+        }
+      }
+
+      // Update the WebGL feature state imperatively (Bypasses React rendering)
+      map.setFeatureState(
+        { source: 'plots-source', id: props.id },
+        { isMatched }
+      );
+    });
+  }, [searchQuery, searchFilter]); // Only run when these strings change
 
   // 1. Handle Mouse Enter/Move
   const onMouseMove = (e: MapLayerMouseEvent) => {
@@ -89,8 +120,18 @@ export const MapView = () => {
         ],
         fitBoundsOptions: { padding: 50 }
       }}
-      mapStyle={{ version: 8, sources: {}, layers: [] }}
-      style={{ width: '100%', height: '100%' }}
+      mapStyle={{ 
+        version: 8, 
+        sources: {}, 
+        layers: [
+          {
+            id: 'background',
+            type: 'background',
+            paint: { 'background-color': '#ffffff' }
+          }
+        ] 
+      }}
+      style={{ width: '100%', height: '100%', backgroundColor: '#ffffff' }}
       maxBounds={[
         [-0.05, -0.05],
         [imageBounds[1][0] + 0.05, imageBounds[0][1] + 0.05]
@@ -98,6 +139,11 @@ export const MapView = () => {
       minZoom={8}
       maxZoom={18}
       onClick={onClick}
+      // CRITICAL: Ensure feature states are applied immediately after the map canvas boots up
+      onLoad={() => {
+        // Trigger a dummy state update to force the useEffect to run once the map is ready
+        useMapStore.setState({ searchQuery: '' });
+      }}
       interactiveLayerIds={['plots-fill-layer']}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
@@ -121,14 +167,22 @@ export const MapView = () => {
           id="plots-fill-layer" 
           type="fill" 
           paint={{
-            'fill-color': '#00ff00',
-            // WebGL conditional logic: If feature-state 'hover' is true, opacity is 0.6, else 0.2
+            // Use property-based styling to make 'sold' plots red and 'available' plots green
+            'fill-color': [
+              'match',
+              ['get', 'status'],
+              'sold', '#ef4444',     // Red for sold
+              '#22c55e'              // Green for available (default)
+            ],
+            // Read directly from WebGL memory
             'fill-opacity': [
               'case',
-              ['boolean', ['feature-state', 'hover'], false],
-              0.6, 
-              0.2  
-            ]
+              ['boolean', ['feature-state', 'hover'], false], 0.6, // Hover is highest priority
+              ['boolean', ['feature-state', 'isMatched'], true], 0.4, // True if matched or search is empty
+              0.02 // Faded out if unmatched
+            ],
+            // Instructs the GPU to animate opacity changes smoothly over 300ms
+            'fill-opacity-transition': { duration: 300 } 
           }} 
         />
         <Layer 
@@ -136,6 +190,12 @@ export const MapView = () => {
           type="line" 
           paint={{
             'line-color': '#ffffff',
+            'line-opacity': [
+              'case',
+              ['boolean', ['feature-state', 'isMatched'], true], 1.0,
+              0.1
+            ],
+            'line-opacity-transition': { duration: 300 },
             'line-width': 2
           }} 
         />
