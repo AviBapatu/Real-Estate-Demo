@@ -1,6 +1,6 @@
 import React from 'react';
 import { Source, Layer } from 'react-map-gl/maplibre';
-import type { FillLayerSpecification, LineLayerSpecification, RasterLayerSpecification } from 'maplibre-gl';
+import type { FillLayerSpecification, LineLayerSpecification, RasterLayerSpecification, SymbolLayerSpecification } from 'maplibre-gl';
 
 // ─── Layer style objects (stable references — defined outside component) ──────
 // Keeping these here means they're frozen at module parse time. MapLibre will
@@ -62,6 +62,28 @@ const plotsLineStyle: Omit<LineLayerSpecification, 'source'> = {
   },
 };
 
+const plotsSymbolStyle: Omit<SymbolLayerSpecification, 'source'> = {
+  id: 'plots-symbol-layer',
+  type: 'symbol',
+  layout: {
+    'text-field': '{plotNumber}',
+    'text-size': 16,
+    'text-anchor': 'center',
+    'text-allow-overlap': false,
+    'text-font': ['Open Sans Semibold', 'Arial Unicode MS Regular']
+  },
+  paint: {
+    'text-color': '#111827',
+    'text-halo-color': '#ffffff',
+    'text-halo-width': 2,
+    'text-opacity': [
+      'case',
+      ['boolean', ['feature-state', 'isMatched'], true], 1.0,
+      0.3
+    ],
+  },
+};
+
 // ─── Props ────────────────────────────────────────────────────────────────────
 interface MapLayersProps {
   imageBounds: [[number, number], [number, number], [number, number], [number, number]];
@@ -78,19 +100,42 @@ interface MapLayersProps {
  * re-renders due to state changes like search queries. This is the ultimate
  * guarantee against WebGL blink caused by Source remounts.
  */
-export const MapLayers = React.memo(({ imageBounds, baseMapUrl, plotData }: MapLayersProps) => (
-  <>
-    {/* Base satellite/plan image */}
-    <Source id="base-image-source" type="image" url={baseMapUrl} coordinates={imageBounds}>
-      <Layer {...baseImageLayerStyle} />
-    </Source>
+export const MapLayers = React.memo(({ imageBounds, baseMapUrl, plotData }: MapLayersProps) => {
+  const enrichedPlotData = React.useMemo(() => {
+    if (!plotData || !plotData.features) return plotData;
+    return {
+      ...plotData,
+      features: plotData.features.map((f: any) => {
+        const id = f.properties?.id || '';
+        const parts = String(id).split('-');
+        const plotNumber = parts.length > 0 ? parts[parts.length - 1] : id;
+        
+        return {
+          ...f,
+          properties: {
+            ...f.properties,
+            plotNumber: plotNumber
+          }
+        };
+      })
+    };
+  }, [plotData]);
 
-    {/* Plot polygons — promoteId wires the JSON "id" field to WebGL feature state */}
-    <Source id="plots-source" type="geojson" data={plotData} promoteId="id">
-      <Layer {...plotsFillStyle} />
-      <Layer {...plotsLineStyle} />
-    </Source>
-  </>
-));
+  return (
+    <>
+      {/* Base satellite/plan image */}
+      <Source id="base-image-source" type="image" url={baseMapUrl} coordinates={imageBounds}>
+        <Layer {...baseImageLayerStyle} />
+      </Source>
+
+      {/* Plot polygons — promoteId wires the JSON "id" field to WebGL feature state */}
+      <Source id="plots-source" type="geojson" data={enrichedPlotData} promoteId="id">
+        <Layer {...plotsFillStyle} />
+        <Layer {...plotsLineStyle} />
+        <Layer {...plotsSymbolStyle} />
+      </Source>
+    </>
+  );
+});
 
 MapLayers.displayName = 'MapLayers';
