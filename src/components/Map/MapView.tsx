@@ -8,7 +8,7 @@ import { useMapStore } from '../../store/useMapStore';
 import { MapLayers } from './MapLayers';
 import { PlotDigitizer } from './PlotDigitizer';
 import plotData from '../../data/plots.json';
-import baseMapUrl from '../../../public/assets/map/base-map.jpg';
+import baseMapUrl from '../../../public/assets/map/base-map.webp';
 
 // ─── Module-level stable constants ────────────────────────────────────────────
 // Nothing here changes after first parse, so MapLibre never sees new references.

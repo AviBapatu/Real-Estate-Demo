@@ -33,7 +33,7 @@ export const Sidebar = () => {
         <h2 className="sidebar__plot-id">{props?.id}</h2>
         <p className="sidebar__price">
           {props?.price != null
-            ? `$${props.price.toLocaleString()}`
+            ? `₹${props.price.toLocaleString()}`
             : '—'}
         </p>
       </div>

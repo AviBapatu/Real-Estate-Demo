@@ -89,7 +89,7 @@ export const LeftSidebar = () => {
 
         {/* Price Range */}
         <section className="left-sidebar__section">
-          <h3 className="left-sidebar__section-title">Price ($)</h3>
+          <h3 className="left-sidebar__section-title">Price (₹)</h3>
           <div className="left-sidebar__range-inputs">
             <input 
               type="number" 

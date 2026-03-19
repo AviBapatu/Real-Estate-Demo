@@ -79,7 +79,7 @@
         "status": "available",
         "price": 72000,
         "size": "1200 sqft",
-        "panorama": "/assets/360/sample3.jpg",
+        "panorama": "/assets/360/sample3.webp",
         "features": [
           "near-entry",
           "corner"
@@ -152,7 +152,7 @@
         "status": "sold",
         "price": 74000,
         "size": "2700 sqft",
-        "panorama": "/assets/360/sample11.jpg",
+        "panorama": "/assets/360/sample11.webp",
         "features": [
           "park-facing",
           "premium-view",
@@ -241,7 +241,7 @@
         "features": [
           "corner"
         ],
-        "panorama": "/assets/360/sample8.jpg"
+        "panorama": "/assets/360/sample8.webp"
       }
     },
     {
@@ -323,7 +323,7 @@
           "east-facing",
           "near-entry"
         ],
-        "panorama": "/assets/360/sample10.jpg"
+        "panorama": "/assets/360/sample10.webp"
       }
     },
     {
@@ -403,7 +403,7 @@
         "features": [
           "park-facing"
         ],
-        "panorama": "/assets/360/sample7.jpg"
+        "panorama": "/assets/360/sample7.webp"
       }
     },
     {
@@ -597,7 +597,7 @@
           "corner",
           "premium-view"
         ],
-        "panorama": "/assets/360/sample8.jpg"
+        "panorama": "/assets/360/sample8.webp"
       }
     },
     {
@@ -707,7 +707,7 @@
           "near-entry",
           "park-facing"
         ],
-        "panorama": "/assets/360/sample6.jpg"
+        "panorama": "/assets/360/sample6.webp"
       }
     },
     {
@@ -819,7 +819,7 @@
         "features": [
           "premium-view"
         ],
-        "panorama": "/assets/360/sample12.jpg"
+        "panorama": "/assets/360/sample12.webp"
       }
     },
     {
@@ -911,7 +911,7 @@
         "features": [
           "near-entry"
         ],
-        "panorama": "/assets/360/sample9.jpg"
+        "panorama": "/assets/360/sample9.webp"
       }
     },
     {
@@ -1027,7 +1027,7 @@
         "features": [
           "premium-view"
         ],
-        "panorama": "/assets/360/sample10.jpg"
+        "panorama": "/assets/360/sample10.webp"
       }
     },
     {
@@ -1096,7 +1096,7 @@
           "park-facing",
           "corner"
         ],
-        "panorama": "/assets/360/sample3.jpg"
+        "panorama": "/assets/360/sample3.webp"
       }
     },
     {
@@ -1138,7 +1138,7 @@
           "premium-view",
           "corner"
         ],
-        "panorama": "/assets/360/sample3.jpg"
+        "panorama": "/assets/360/sample3.webp"
       }
     },
     {
@@ -1322,7 +1322,7 @@
           "near-entry",
           "east-facing"
         ],
-        "panorama": "/assets/360/sample4.jpg"
+        "panorama": "/assets/360/sample4.webp"
       }
     },
     {
@@ -1426,7 +1426,7 @@
         "features": [
           "east-facing"
         ],
-        "panorama": "/assets/360/sample11.jpg"
+        "panorama": "/assets/360/sample11.webp"
       }
     },
     {
@@ -1531,7 +1531,7 @@
           "park-facing",
           "near-entry"
         ],
-        "panorama": "/assets/360/sample11.jpg"
+        "panorama": "/assets/360/sample11.webp"
       }
     },
     {
@@ -1632,7 +1632,7 @@
           "park-facing",
           "east-facing"
         ],
-        "panorama": "/assets/360/sample13.jpg"
+        "panorama": "/assets/360/sample13.webp"
       }
     },
     {
@@ -1677,7 +1677,7 @@
           "premium-view",
           "east-facing"
         ],
-        "panorama": "/assets/360/sample3.jpg"
+        "panorama": "/assets/360/sample3.webp"
       }
     },
     {
@@ -1741,7 +1741,7 @@
         "features": [
           "east-facing"
         ],
-        "panorama": "/assets/360/sample9.jpg"
+        "panorama": "/assets/360/sample9.webp"
       }
     },
     {
@@ -1947,7 +1947,7 @@
         "features": [
           "near-entry"
         ],
-        "panorama": "/assets/360/sample7.jpg"
+        "panorama": "/assets/360/sample7.webp"
       }
     },
     {
@@ -2048,7 +2048,7 @@
           "corner",
           "park-facing"
         ],
-        "panorama": "/assets/360/sample1.jpg"
+        "panorama": "/assets/360/sample1.webp"
       }
     },
     {
@@ -2125,7 +2125,7 @@
           "premium-view",
           "east-facing"
         ],
-        "panorama": "/assets/360/sample6.jpg"
+        "panorama": "/assets/360/sample6.webp"
       }
     },
     {
@@ -2167,7 +2167,7 @@
           "premium-view",
           "corner"
         ],
-        "panorama": "/assets/360/sample5.jpg"
+        "panorama": "/assets/360/sample5.webp"
       }
     },
     {
@@ -2211,7 +2211,7 @@
         "features": [
           "east-facing"
         ],
-        "panorama": "/assets/360/sample5.jpg"
+        "panorama": "/assets/360/sample5.webp"
       }
     },
     {
@@ -2253,7 +2253,7 @@
           "near-entry",
           "east-facing"
         ],
-        "panorama": "/assets/360/sample7.jpg"
+        "panorama": "/assets/360/sample7.webp"
       }
     },
     {
@@ -2294,7 +2294,7 @@
           "park-facing",
           "near-entry"
         ],
-        "panorama": "/assets/360/sample8.jpg"
+        "panorama": "/assets/360/sample8.webp"
       }
     },
     {
@@ -2335,7 +2335,7 @@
           "east-facing",
           "park-facing"
         ],
-        "panorama": "/assets/360/sample3.jpg"
+        "panorama": "/assets/360/sample3.webp"
       }
     },
     {
@@ -2377,7 +2377,7 @@
           "corner",
           "park-facing"
         ],
-        "panorama": "/assets/360/sample3.jpg"
+        "panorama": "/assets/360/sample3.webp"
       }
     },
     {
@@ -2417,7 +2417,7 @@
         "features": [
           "park-facing"
         ],
-        "panorama": "/assets/360/sample10.jpg"
+        "panorama": "/assets/360/sample10.webp"
       }
     },
     {
@@ -2471,7 +2471,7 @@
           "premium-view",
           "near-entry"
         ],
-        "panorama": "/assets/360/sample8.jpg"
+        "panorama": "/assets/360/sample8.webp"
       }
     },
     {
@@ -2516,7 +2516,7 @@
           "premium-view",
           "corner"
         ],
-        "panorama": "/assets/360/sample9.jpg"
+        "panorama": "/assets/360/sample9.webp"
       }
     },
     {
@@ -2618,7 +2618,7 @@
           "near-entry",
           "east-facing"
         ],
-        "panorama": "/assets/360/sample8.jpg"
+        "panorama": "/assets/360/sample8.webp"
       }
     }
   ]
