@@ -27,6 +27,10 @@ interface MapState {
   // Sidebar state
   selectedPlot: SelectedPlot | null;
   setSelectedPlot: (plot: SelectedPlot | null) => void;
+
+  // Admin mode
+  isAdminMode: boolean;
+  setAdminMode: (val: boolean) => void;
 }
 
 export const useMapStore = create<MapState>((set) => ({
@@ -43,4 +47,8 @@ export const useMapStore = create<MapState>((set) => ({
   // Sidebar state
   selectedPlot: null,
   setSelectedPlot: (plot) => set({ selectedPlot: plot }),
+
+  // Admin mode
+  isAdminMode: false,
+  setAdminMode: (val) => set({ isAdminMode: val }),
 }));

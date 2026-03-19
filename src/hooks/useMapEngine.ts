@@ -15,7 +15,7 @@ import plotData from '../data/plots.json';
  *
  * Returns only the event handlers the <Map> component needs to attach.
  */
-export const useMapEngine = (mapRef: React.RefObject<MapRef>) => {
+export const useMapEngine = (mapRef: React.RefObject<MapRef | null>) => {
   const hoveredPolygonId = useRef<string | null>(null);
   const {
     searchQuery,

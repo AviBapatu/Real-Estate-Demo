@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mapbox/mapbox-gl-draw": "^1.5.1",
     "@photo-sphere-viewer/core": "^5.14.1",
     "@turf/turf": "^7.3.4",
+    "@types/mapbox__mapbox-gl-draw": "^1.4.9",
     "maplibre-gl": "^5.20.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

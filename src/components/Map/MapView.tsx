@@ -6,6 +6,7 @@ import { calculateImageBounds } from '../../utils/coordinateMath';
 import { useMapEngine } from '../../hooks/useMapEngine';
 import { useMapStore } from '../../store/useMapStore';
 import { MapLayers } from './MapLayers';
+import { PlotDigitizer } from './PlotDigitizer';
 import plotData from '../../data/plots.json';
 import baseMapUrl from '../../../public/assets/map/base-map.jpg';
 
@@ -79,6 +80,7 @@ export const MapView = () => {
         baseMapUrl={baseMapUrl}
         plotData={plotData}
       />
+      <PlotDigitizer mapRef={mapRef} />
     </Map>
   );
 };

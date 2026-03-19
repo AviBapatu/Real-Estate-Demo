@@ -1,7 +1,7 @@
 import { useMapStore } from '../../store/useMapStore';
 
 export const Navbar = () => {
-  const { searchQuery, setSearchQuery, searchFilter, setSearchFilter } = useMapStore();
+  const { searchQuery, setSearchQuery, searchFilter, setSearchFilter, isAdminMode, setAdminMode } = useMapStore();
 
   const getPlaceholderText = () => {
     switch (searchFilter) {
@@ -94,8 +94,26 @@ export const Navbar = () => {
         </div>
       </div>
 
-      {/* Right Balancer */}
-      <div style={{ flex: 1 }}></div>
+      {/* Admin Mode Toggle */}
+      <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+        <button
+          onClick={() => setAdminMode(!isAdminMode)}
+          style={{
+            padding: '8px 16px',
+            borderRadius: '6px',
+            fontSize: '12px',
+            fontWeight: 600,
+            background: isAdminMode ? '#ef4444' : '#f3f4f6',
+            color: isAdminMode ? '#fff' : '#374151',
+            border: '1px solid #e5e7eb',
+            cursor: 'pointer',
+            transition: 'all 0.15s ease',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {isAdminMode ? '🔴 EXIT ADMIN' : '🔑 ADMIN LOGIN'}
+        </button>
+      </div>
 
     </nav>
   );
