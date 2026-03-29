@@ -50,6 +50,10 @@
   }
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -59,6 +63,7 @@ html, body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Prevent horizontal scrolling at the document level */
 }
 
 /* Root fills the viewport — individual routes control their own scroll/overflow */
@@ -129,4 +134,48 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
   appearance: textfield;
+}
+
+/* ── Global Premium Scrollbar ───────────────────────────────────────────── */
+
+/* Chrome, Safari, and modern Edge */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(87, 124, 26, 0.25);
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background-clip: content-box;
+  transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(87, 124, 26, 0.5);
+}
+
+/* For elements that should HAVE a visible premium scrollbar */
+.premium-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(87, 124, 26, 0.25) transparent;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(87, 124, 26, 0.25) transparent;
+}
+
+/* Hide scrollbar on body completely as individual routes manage it */
+body::-webkit-scrollbar {
+  display: none;
+}
+body {
+  scrollbar-width: none;
 }

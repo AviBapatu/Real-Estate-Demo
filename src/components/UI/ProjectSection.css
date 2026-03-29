@@ -30,10 +30,10 @@
   position: relative;
   width: 100%;
   min-height: 90vh;
-  overflow: hidden;
+  overflow: hidden; /* This clips the background zoom */
   display: flex;
   align-items: center;
-  padding: 6rem 2rem;
+  padding: 6rem 1.5rem;
   box-sizing: border-box;
 }
 
@@ -133,7 +133,8 @@
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 420px;
+  /* Use minmax to prevent overflow if the fixed column is too wide for 1fr */
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
   gap: 4rem;
   align-items: center;
 }
