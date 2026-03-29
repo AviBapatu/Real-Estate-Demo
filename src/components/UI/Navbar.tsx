@@ -1,7 +1,7 @@
 import { useMapStore } from '../../store/useMapStore';
 import { useNavigate } from 'react-router-dom';
 
-export const Navbar = () => {
+export const Navbar: React.FC<{ variant?: 'landing' | 'map' }> = ({ variant = 'map' }) => {
   const { searchQuery, setSearchQuery, searchFilter, setSearchFilter, isAdminMode, setAdminMode } = useMapStore();
   const navigate = useNavigate();
 
@@ -15,13 +15,13 @@ export const Navbar = () => {
 
   return (
     <nav style={{
-      position: 'absolute',
+      position: variant === 'landing' ? 'relative' : 'absolute',
       top: 0,
       left: 0,
       width: '100%',
-      height: '64px', // Fixed height for SaaS consistency
+      height: '64px',
       background: '#ffffff',
-      borderBottom: '1px solid #e5e7eb', // Crisp separator from the map
+      borderBottom: '1px solid #e5e7eb',
       display: 'flex',
       alignItems: 'center',
       padding: '0 24px',
@@ -64,110 +64,114 @@ export const Navbar = () => {
         </div>
       </div>
 
-      {/* Unified Search Component */}
-      <div style={{ flex: 2, display: 'flex', justifyContent: 'center' }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          background: '#f9fafb', // Very subtle off-white
-          border: '1px solid #e5e7eb',
-          borderRadius: '8px',
-          width: '100%',
-          maxWidth: '520px',
-          overflow: 'hidden', // Ensures inner elements respect the rounded corners
-          boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
-        }}>
-          
-          <select 
-            value={searchFilter}
-            onChange={(e) => {
-              setSearchFilter(e.target.value);
-              setSearchQuery('');
-            }}
-            style={{
-              border: 'none',
-              background: 'transparent',
-              padding: '10px 16px',
-              fontSize: '0.875rem',
-              color: '#4b5563', // Slate gray
-              fontWeight: 500,
-              outline: 'none',
-              cursor: 'pointer',
-              borderRight: '1px solid #e5e7eb',
-              WebkitAppearance: 'none', // Removes default browser styling on Mac
-              MozAppearance: 'none'
-            }}
-          >
-            <option value="id">Plot Number</option>
-            <option value="size">Size</option>
-            <option value="features">Features</option>
-          </select>
+      {variant !== 'landing' && (
+        <>
+          {/* Unified Search Component */}
+          <div style={{ flex: 2, display: 'flex', justifyContent: 'center' }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              background: '#f9fafb',
+              border: '1px solid #e5e7eb',
+              borderRadius: '8px',
+              width: '100%',
+              maxWidth: '520px',
+              overflow: 'hidden',
+              boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
+            }}>
+              
+              <select 
+                value={searchFilter}
+                onChange={(e) => {
+                  setSearchFilter(e.target.value);
+                  setSearchQuery('');
+                }}
+                style={{
+                  border: 'none',
+                  background: 'transparent',
+                  padding: '10px 16px',
+                  fontSize: '0.875rem',
+                  color: '#4b5563',
+                  fontWeight: 500,
+                  outline: 'none',
+                  cursor: 'pointer',
+                  borderRight: '1px solid #e5e7eb',
+                  WebkitAppearance: 'none',
+                  MozAppearance: 'none'
+                }}
+              >
+                <option value="id">Plot Number</option>
+                <option value="size">Size</option>
+                <option value="features">Features</option>
+              </select>
 
-          <input 
-            type={searchFilter === 'size' ? 'number' : 'text'}
-            placeholder={getPlaceholderText()} 
-            value={searchQuery}
-            onChange={(e) => {
-              let val = e.target.value;
-              if (searchFilter === 'features') {
-                val = val.replace(/[0-9]/g, '');
-              }
-              setSearchQuery(val);
-            }}
-            style={{
-              flex: 1,
-              border: 'none',
-              outline: 'none',
-              background: 'transparent',
-              padding: '10px 16px',
-              fontSize: '0.875rem',
-              color: '#111827'
-            }}
-          />
-          {searchQuery && (
+              <input 
+                type={searchFilter === 'size' ? 'number' : 'text'}
+                placeholder={getPlaceholderText()} 
+                value={searchQuery}
+                onChange={(e) => {
+                  let val = e.target.value;
+                  if (searchFilter === 'features') {
+                    val = val.replace(/[0-9]/g, '');
+                  }
+                  setSearchQuery(val);
+                }}
+                style={{
+                  flex: 1,
+                  border: 'none',
+                  outline: 'none',
+                  background: 'transparent',
+                  padding: '10px 16px',
+                  fontSize: '0.875rem',
+                  color: '#111827'
+                }}
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '0 16px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#9ca3af',
+                  }}
+                  aria-label="Clear search"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Admin Mode Toggle */}
+          <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
             <button
-              onClick={() => setSearchQuery('')}
+              onClick={() => setAdminMode(!isAdminMode)}
               style={{
-                background: 'none',
-                border: 'none',
+                padding: '8px 16px',
+                borderRadius: '6px',
+                fontSize: '12px',
+                fontWeight: 600,
+                background: isAdminMode ? '#ef4444' : '#f3f4f6',
+                color: isAdminMode ? '#fff' : '#374151',
+                border: '1px solid #e5e7eb',
                 cursor: 'pointer',
-                padding: '0 16px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#9ca3af',
+                transition: 'all 0.15s ease',
+                whiteSpace: 'nowrap',
               }}
-              aria-label="Clear search"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
+              {isAdminMode ? '🔴 EXIT ADMIN' : '🔑 ADMIN LOGIN'}
             </button>
-          )}
-        </div>
-      </div>
-
-      {/* Admin Mode Toggle */}
-      <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-        <button
-          onClick={() => setAdminMode(!isAdminMode)}
-          style={{
-            padding: '8px 16px',
-            borderRadius: '6px',
-            fontSize: '12px',
-            fontWeight: 600,
-            background: isAdminMode ? '#ef4444' : '#f3f4f6',
-            color: isAdminMode ? '#fff' : '#374151',
-            border: '1px solid #e5e7eb',
-            cursor: 'pointer',
-            transition: 'all 0.15s ease',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {isAdminMode ? '🔴 EXIT ADMIN' : '🔑 ADMIN LOGIN'}
-        </button>
-      </div>
+          </div>
+        </>
+      )}
 
     </nav>
   );

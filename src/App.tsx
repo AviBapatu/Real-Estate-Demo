@@ -24,13 +24,13 @@ function MapLayout() {
   }
 
   return (
-    <>
+    <div style={{ position: 'fixed', inset: 0, overflow: 'hidden' }}>
       <Navbar />
       <LeftSidebar />
       <MapView />
       <Sidebar />
       <PanoramaViewer />
-    </>
+    </div>
   );
 }
 

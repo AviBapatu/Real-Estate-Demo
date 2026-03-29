@@ -50,17 +50,23 @@
   }
 }
 
-html, body, #root {
+html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
   background-color: #1a1a1a;
-  /* CRITICAL: Modern SaaS Font Stack */
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Root fills the viewport — individual routes control their own scroll/overflow */
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* Ensure the MapLibre container fills the React root */
