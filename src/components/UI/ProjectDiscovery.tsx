@@ -68,10 +68,10 @@ const projectData = [
 ];
 
 const whyPoints = [
-  { n: '01', title: 'RERA Approved',         text: 'All our projects are fully RERA registered, ensuring legal compliance and buyer protection at every step.'          },
-  { n: '02', title: 'Transparent Pricing',   text: 'No hidden charges. What you see is what you pay — detailed cost break-ups available on request.'                   },
-  { n: '03', title: 'Premium Construction',  text: 'Grade-A materials, ISO-certified contractors, and rigorous QC at every stage of the build cycle.'                  },
-  { n: '04', title: 'On-Time Possession',    text: 'We have a proven track record of delivering projects within committed timelines without compromise.'                },
+  { n: '01', icon: '🏛️', title: 'RERA Approved',         text: 'All our projects are fully RERA registered, ensuring legal compliance and buyer protection at every step.'          },
+  { n: '02', icon: '💎', title: 'Transparent Pricing',   text: 'No hidden charges. What you see is what you pay — detailed cost break-ups available on request.'                   },
+  { n: '03', icon: '🔨', title: 'Premium Construction',  text: 'Grade-A materials, ISO-certified contractors, and rigorous QC at every stage of the build cycle.'                  },
+  { n: '04', icon: '📅', title: 'On-Time Possession',    text: 'We have a proven track record of delivering projects within committed timelines without compromise.'                },
 ];
 
 /* ─── Page component ─────────────────────────────────────────── */
@@ -80,26 +80,48 @@ export const ProjectDiscovery: React.FC = () => {
   const { setAppLoading, setCurrentProject } = useMapStore();
   const navigate = useNavigate();
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const stopTimer = useCallback(() => {
+    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+  }, []);
 
   // Start / restart the 4-second auto-advance timer
   const startTimer = useCallback(() => {
-    if (timerRef.current) clearInterval(timerRef.current);
+    stopTimer();
     timerRef.current = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % projects.length);
     }, 4000);
-  }, []);
+  }, [stopTimer]);
 
   useEffect(() => {
     startTimer();
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [startTimer]);
+    return () => stopTimer();
+  }, [startTimer, stopTimer]);
 
-  // When user clicks a dot, jump to that slide AND reset the timer
+  // Dot click: jump + reset timer (only if not paused)
   const handleSlideChange = useCallback((index: number) => {
     setActiveSlide(index);
-    startTimer();
-  }, [startTimer]);
+    if (!isPaused) startTimer();
+  }, [isPaused, startTimer]);
+
+  const handlePrev = useCallback(() => {
+    setActiveSlide((prev) => (prev - 1 + projects.length) % projects.length);
+    if (!isPaused) startTimer();
+  }, [isPaused, startTimer]);
+
+  const handleNext = useCallback(() => {
+    setActiveSlide((prev) => (prev + 1) % projects.length);
+    if (!isPaused) startTimer();
+  }, [isPaused, startTimer]);
+
+  const handlePauseToggle = useCallback(() => {
+    setIsPaused((prev) => {
+      if (prev) { startTimer(); return false; }
+      else       { stopTimer();  return true;  }
+    });
+  }, [startTimer, stopTimer]);
 
   const handleProjectSelect = (project: string) => {
     setAppLoading(true);
@@ -109,8 +131,8 @@ export const ProjectDiscovery: React.FC = () => {
     }, 300);
   };
 
-  const active    = projects[activeSlide];
-  const info      = projectData[activeSlide];
+  const active = projects[activeSlide];
+  const info   = projectData[activeSlide];
 
   return (
     <div className="landing-page">
@@ -128,21 +150,27 @@ export const ProjectDiscovery: React.FC = () => {
           cards={info.cards}
           onCTAClick={() => handleProjectSelect(active.title)}
           onSlideChange={handleSlideChange}
+          onPrev={handlePrev}
+          onNext={handleNext}
+          onPauseToggle={handlePauseToggle}
+          isPaused={isPaused}
         />
 
-        {/* ── 3. Amenities Strip ─────────────────────────────── */}
+        {/* ── 3. Amenities ─────────────────────────────────── */}
         <section className="landing-page__amenities">
-          <div
-            className="amenities__container"
-            key={`a-${activeSlide}`}
-            style={{ animation: 'softlyFadeIn 0.65s cubic-bezier(0.16,1,0.3,1) both' }}
-          >
-            <h3 className="amenities__heading">World-Class Amenities</h3>
-            <p className="amenities__subheading">Every detail curated for the way you want to live.</p>
+          <div className="amenities__container" key={`a-${activeSlide}`}>
+            <div className="amenities__header">
+              <span className="amenities__eyebrow">Lifestyle</span>
+              <h3 className="amenities__heading">Built for the way<br />you want to live.</h3>
+              <p className="amenities__subheading">
+                Every amenity is chosen deliberately — nothing is filler,
+                everything is intentional.
+              </p>
+            </div>
             <div className="amenities__grid">
               {info.amenities.map((a) => (
                 <div key={a.label} className="amenity__item">
-                  <span className="amenity__icon">{a.icon}</span>
+                  <div className="amenity__icon-wrap">{a.icon}</div>
                   <span className="amenity__label">{a.label}</span>
                 </div>
               ))}
@@ -150,28 +178,67 @@ export const ProjectDiscovery: React.FC = () => {
           </div>
         </section>
 
-        {/* ── 4. Why Greenkrt ────────────────────────────────── */}
+        {/* ── 4. Why Greenkrt ──────────────────────────────── */}
         <section className="landing-page__why">
           <div className="why__container">
-            <h3 className="why__heading">Why Choose Greenkrt?</h3>
-            <p className="why__subheading">Built on trust, delivered with excellence.</p>
-            <div className="why__grid">
+            <div className="why__header">
+              <div>
+                <p className="why__eyebrow">Our Promise</p>
+                <h3 className="why__heading">The standard<br />others aspire to.</h3>
+              </div>
+              <p className="why__intro">
+                We don't just build homes — we build confidence. Every decision
+                we make is backed by clarity, quality, and a commitment to doing
+                right by the people who trust us.
+              </p>
+            </div>
+            <div className="why__list">
               {whyPoints.map((w) => (
-                <div key={w.n} className="why__card">
-                  <div className="why__number">{w.n}</div>
-                  <div className="why__card-title">{w.title}</div>
-                  <div className="why__card-text">{w.text}</div>
+                <div key={w.n} className="why__item">
+                  <div className="why__item-icon">{w.icon}</div>
+                  <h4 className="why__item-title">{w.title}</h4>
+                  <p className="why__item-text">{w.text}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── 5. Footer ──────────────────────────────────────── */}
+        {/* ── 5. Footer ────────────────────────────────────── */}
         <footer className="landing-page__footer">
           <div className="footer__inner">
-            <span className="footer__brand">Greenkrt Integrated Services Pvt. Ltd.</span>
-            <span className="footer__copy">© {new Date().getFullYear()} All rights reserved.</span>
+            <div className="footer__top">
+              <div>
+                <div className="footer__brand-name">Greenkrt</div>
+                <div className="footer__brand-sub">Integrated Services Pvt. Ltd.</div>
+                <p className="footer__tagline">
+                  Premium residential and commercial real estate built on trust,
+                  transparency, and timeless design.
+                </p>
+              </div>
+              <div>
+                <p className="footer__col-heading">Projects</p>
+                <ul className="footer__links">
+                  <li>Luxury Villas — Hyderabad</li>
+                  <li>Green Estates — Bangalore</li>
+                  <li>Skyline Residences — Mumbai</li>
+                </ul>
+              </div>
+              <div>
+                <p className="footer__col-heading">Contact</p>
+                <ul className="footer__links">
+                  <li>sales@greenkrt.in</li>
+                  <li>+91 XXXXX XXXXX </li>
+                  <li>RERA Registered Developer</li>
+                </ul>
+              </div>
+            </div>
+            <div className="footer__bottom">
+              <span className="footer__copy">
+                © {new Date().getFullYear()} Greenkrt Integrated Services Pvt. Ltd. All rights reserved.
+              </span>
+              <span className="footer__badge">RERA Approved</span>
+            </div>
           </div>
         </footer>
 

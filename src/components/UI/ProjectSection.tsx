@@ -17,7 +17,10 @@ interface ProjectSectionProps {
   cards: CardDef[];
   onCTAClick: () => void;
   onSlideChange?: (index: number) => void;
-  /** Changing this key causes React to remount → re-triggers CSS animations */
+  onPrev?: () => void;
+  onNext?: () => void;
+  onPauseToggle?: () => void;
+  isPaused?: boolean;
   animKey: number;
 }
 
@@ -30,6 +33,10 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
   cards,
   onCTAClick,
   onSlideChange,
+  onPrev,
+  onNext,
+  onPauseToggle,
+  isPaused = false,
   animKey,
 }) => {
   return (
@@ -40,6 +47,49 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
         className="project-section__bg"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       />
+
+      {/* ── Playback Controls (top-right) ── */}
+      {(onPrev || onNext || onPauseToggle) && (
+        <div className="project-section__controls">
+          <button
+            className="ps-ctrl-btn"
+            onClick={onPrev}
+            aria-label="Previous project"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+          </button>
+
+          <button
+            className={`ps-ctrl-btn ps-ctrl-btn--pause${isPaused ? ' ps-ctrl-btn--active' : ''}`}
+            onClick={onPauseToggle}
+            aria-label={isPaused ? 'Resume slideshow' : 'Pause slideshow'}
+          >
+            {isPaused ? (
+              /* Play icon */
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5.14v14l11-7-11-7z" />
+              </svg>
+            ) : (
+              /* Pause icon */
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+              </svg>
+            )}
+          </button>
+
+          <button
+            className="ps-ctrl-btn"
+            onClick={onNext}
+            aria-label="Next project"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </button>
+        </div>
+      )}
 
       <div className="project-section__inner">
 
