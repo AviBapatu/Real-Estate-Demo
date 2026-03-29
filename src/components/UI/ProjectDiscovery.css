@@ -6,6 +6,15 @@
   overflow-y: auto;
   overflow-x: hidden;
   font-family: 'Inter', system-ui, sans-serif;
+  /* Hide scrollbar — Firefox */
+  scrollbar-width: none;
+  /* Hide scrollbar — IE/Edge legacy */
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbar — Chrome / Safari / modern Edge */
+.landing-page::-webkit-scrollbar {
+  display: none;
 }
 
 .landing-page__main {
