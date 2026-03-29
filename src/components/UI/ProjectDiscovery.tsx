@@ -1,4 +1,5 @@
 import React from 'react';
+import { ProjectCarousel } from './ProjectCarousel';
 import { useNavigate } from 'react-router-dom';
 import { useMapStore } from '../../store/useMapStore';
 import './ProjectDiscovery.css';
@@ -33,21 +34,9 @@ export const ProjectDiscovery: React.FC = () => {
         </div>
       </div>
       
-      <div className="discovery__right">
-        <div className="discovery__selection">
-          <h2 className="discovery__title">Explore Our Projects</h2>
-          <div className="discovery__projects">
-            {['Project 1', 'Project 2', 'Project 3'].map((project) => (
-              <button 
-                key={project} 
-                className="discovery__project-btn"
-                onClick={() => handleProjectSelect(project)}
-              >
-                <span className="discovery__project-btn-text">{project}</span>
-                <span className="discovery__project-btn-arrow">→</span>
-              </button>
-            ))}
-          </div>
+      <div className="discovery__right !p-0 md:!p-8">
+        <div className="w-full h-full flex items-center justify-center">
+          <ProjectCarousel onProjectSelect={handleProjectSelect} />
         </div>
       </div>
     </div>
