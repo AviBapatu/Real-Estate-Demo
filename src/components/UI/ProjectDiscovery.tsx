@@ -1,73 +1,105 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMapStore } from '../../store/useMapStore';
-import { ProjectCarousel, projects } from './ProjectCarousel';
-import { Navbar } from './Navbar';
+import { projects } from './ProjectCarousel';
+import { ProjectSection } from './ProjectSection';
 import './ProjectDiscovery.css';
 
-// Rich per-project info panels
-const projectInfo = [
+/* ─── Per-project data ───────────────────────────────────────── */
+
+const projectData = [
   {
-    area: '12,000 sq.ft.',
-    config: '4 & 5 BHK',
-    status: 'Under Construction',
-    possession: 'Dec 2026',
     price: '₹1.8 Cr onwards',
     desc: 'Experience ultra-premium lakeside living with panoramic views and infinity pools. The absolute paradigm of modern luxury architecture designed for the uncompromising elite.',
+    cards: [
+      { icon: '📐', label: 'Project Area',   value: '12,000 sq.ft.'       },
+      { icon: '🏠', label: 'Configuration', value: '4 & 5 BHK'            },
+      { icon: '🏗️', label: 'Status',        value: 'Under Construction'   },
+      { icon: '📅', label: 'Possession',    value: 'Dec 2026'             },
+      { icon: '💰', label: 'Starting Price', value: '₹1.8 Cr'             },
+    ],
     amenities: [
-      { icon: '🏊', label: 'Infinity Pool' },
-      { icon: '🏋️', label: 'Olympic Gym' },
-      { icon: '🌿', label: 'Zen Garden' },
-      { icon: '🎾', label: 'Tennis Court' },
-      { icon: '🚗', label: 'Smart Parking' },
-      { icon: '🔐', label: '24/7 Security' },
+      { icon: '🏊', label: 'Infinity Pool'  },
+      { icon: '🏋️', label: 'Olympic Gym'   },
+      { icon: '🌿', label: 'Zen Garden'     },
+      { icon: '🎾', label: 'Tennis Court'   },
+      { icon: '🚗', label: 'Smart Parking'  },
+      { icon: '🔐', label: '24/7 Security'  },
     ],
   },
   {
-    area: '8,500 sq.ft.',
-    config: '3 & 4 BHK + Study',
-    status: 'Ready to Move',
-    possession: 'Immediate',
     price: '₹95 L onwards',
     desc: 'A serene sanctuary featuring smart-home integration, vertical gardens, and a state‑of‑the‑art multi-level clubhouse. Move right in and start living your dream.',
+    cards: [
+      { icon: '📐', label: 'Project Area',   value: '8,500 sq.ft.'         },
+      { icon: '🏠', label: 'Configuration', value: '3 & 4 BHK + Study'    },
+      { icon: '✅', label: 'Status',        value: 'Ready to Move'        },
+      { icon: '📅', label: 'Possession',    value: 'Immediate'            },
+      { icon: '💰', label: 'Starting Price', value: '₹95 L'               },
+    ],
     amenities: [
-      { icon: '🏡', label: 'Clubhouse' },
+      { icon: '🏡', label: 'Clubhouse'       },
       { icon: '🌱', label: 'Vertical Garden' },
-      { icon: '💡', label: 'Smart Home' },
-      { icon: '🛝', label: 'Kids Zone' },
-      { icon: '🏃', label: 'Jogging Track' },
-      { icon: '⚡', label: 'Solar Power' },
+      { icon: '💡', label: 'Smart Home'      },
+      { icon: '🛝', label: 'Kids Zone'       },
+      { icon: '🏃', label: 'Jogging Track'   },
+      { icon: '⚡', label: 'Solar Power'     },
     ],
   },
   {
-    area: '15,000 sq.ft.',
-    config: 'Sky Penthouses',
-    status: 'New Launch',
-    possession: 'Mar 2028',
     price: '₹4.5 Cr onwards',
     desc: 'Ascend to the pinnacle of skyline extravagance. Unrivaled premium amenities situated gracefully in the heart of the booming financial district. Simply breathtaking.',
+    cards: [
+      { icon: '📐', label: 'Project Area',   value: '15,000 sq.ft.'       },
+      { icon: '🏠', label: 'Configuration', value: 'Sky Penthouses'       },
+      { icon: '🚀', label: 'Status',        value: 'New Launch'           },
+      { icon: '📅', label: 'Possession',    value: 'Mar 2028'             },
+      { icon: '💰', label: 'Starting Price', value: '₹4.5 Cr'            },
+    ],
     amenities: [
-      { icon: '🌆', label: 'Sky Lounge' },
-      { icon: '🍽️', label: 'Fine Dining' },
-      { icon: '🛁', label: 'Spa & Sauna' },
-      { icon: '🎬', label: 'Private Cinema' },
-      { icon: '🚁', label: 'Helipad' },
-      { icon: '🏦', label: 'Concierge' },
+      { icon: '🌆', label: 'Sky Lounge'      },
+      { icon: '🍽️', label: 'Fine Dining'     },
+      { icon: '🛁', label: 'Spa & Sauna'     },
+      { icon: '🎬', label: 'Private Cinema'  },
+      { icon: '🚁', label: 'Helipad'         },
+      { icon: '🏦', label: 'Concierge'       },
     ],
   },
 ];
 
 const whyPoints = [
-  { n: '01', title: 'RERA Approved', text: 'All our projects are fully RERA registered, ensuring legal compliance and buyer protection at every step.' },
-  { n: '02', title: 'Transparent Pricing', text: 'No hidden charges. What you see is what you pay — detailed cost break-ups available on request.' },
-  { n: '03', title: 'Premium Construction', text: 'Grade-A materials, ISO-certified contractors, and rigorous QC at every stage of the build cycle.' },
-  { n: '04', title: 'On-Time Possession', text: 'We have a proven track record of delivering projects within committed timelines without compromise.' },
+  { n: '01', title: 'RERA Approved',         text: 'All our projects are fully RERA registered, ensuring legal compliance and buyer protection at every step.'          },
+  { n: '02', title: 'Transparent Pricing',   text: 'No hidden charges. What you see is what you pay — detailed cost break-ups available on request.'                   },
+  { n: '03', title: 'Premium Construction',  text: 'Grade-A materials, ISO-certified contractors, and rigorous QC at every stage of the build cycle.'                  },
+  { n: '04', title: 'On-Time Possession',    text: 'We have a proven track record of delivering projects within committed timelines without compromise.'                },
 ];
+
+/* ─── Page component ─────────────────────────────────────────── */
 
 export const ProjectDiscovery: React.FC = () => {
   const { setAppLoading, setCurrentProject } = useMapStore();
   const navigate = useNavigate();
   const [activeSlide, setActiveSlide] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Start / restart the 4-second auto-advance timer
+  const startTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % projects.length);
+    }, 4000);
+  }, []);
+
+  useEffect(() => {
+    startTimer();
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [startTimer]);
+
+  // When user clicks a dot, jump to that slide AND reset the timer
+  const handleSlideChange = useCallback((index: number) => {
+    setActiveSlide(index);
+    startTimer();
+  }, [startTimer]);
 
   const handleProjectSelect = (project: string) => {
     setAppLoading(true);
@@ -77,79 +109,34 @@ export const ProjectDiscovery: React.FC = () => {
     }, 300);
   };
 
-  const active = projects[activeSlide];
-  const info = projectInfo[activeSlide];
+  const active    = projects[activeSlide];
+  const info      = projectData[activeSlide];
 
   return (
     <div className="landing-page">
-      {/* Navbar — position:relative so it flows naturally, no gap below */}
-      <Navbar variant="landing" />
-
       <main className="landing-page__main">
 
-        {/* ── Hero Carousel (full width, flush with navbar) ── */}
-        <section className="landing-page__hero">
-          <ProjectCarousel
-            onProjectSelect={handleProjectSelect}
-            onSlideChange={setActiveSlide}
-          />
-        </section>
+        {/* ── 1. Cinematic Project Section (now at top, replaces carousel) ── */}
+        <ProjectSection
+          key={activeSlide}
+          animKey={activeSlide}
+          title={active.title}
+          location={active.location}
+          description={info.desc}
+          price={info.price}
+          backgroundImage={active.image}
+          cards={info.cards}
+          onCTAClick={() => handleProjectSelect(active.title)}
+          onSlideChange={handleSlideChange}
+        />
 
-        {/* ── Dynamic Project Details (re-mounts on slide change → fade animation) ── */}
-        <section className="landing-page__details">
-          <div className="details__container" key={activeSlide}>
-            <div className="details__header">
-              <h2 className="details__title">{active.title}</h2>
-              <p className="details__location">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" style={{ width: '1rem', height: '1rem', display: 'inline', verticalAlign: 'text-bottom', marginRight: '6px' }}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                </svg>
-                {active.location}
-              </p>
-            </div>
-
-            <div className="details__grid">
-              <div className="details__card">
-                <span className="details__label">Project Area</span>
-                <span className="details__value">{info.area}</span>
-              </div>
-              <div className="details__card">
-                <span className="details__label">Configuration</span>
-                <span className="details__value">{info.config}</span>
-              </div>
-              <div className="details__card">
-                <span className="details__label">Status</span>
-                <span className="details__value">{info.status}</span>
-              </div>
-              <div className="details__card">
-                <span className="details__label">Possession</span>
-                <span className="details__value">{info.possession}</span>
-              </div>
-              <div className="details__card">
-                <span className="details__label">Starting Price</span>
-                <span className="details__value">{info.price}</span>
-              </div>
-            </div>
-
-            <div className="details__description">
-              <p>{info.desc}</p>
-              <button
-                className="details__action-btn"
-                onClick={() => handleProjectSelect(active.title)}
-              >
-                View Master Plan
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" style={{ width: '1rem', height: '1rem' }}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Amenities Strip (also re-animates per slide) ── */}
+        {/* ── 3. Amenities Strip ─────────────────────────────── */}
         <section className="landing-page__amenities">
-          <div className="amenities__container" key={`a-${activeSlide}`} style={{ animation: 'softlyFadeIn 0.65s cubic-bezier(0.16,1,0.3,1) both' }}>
+          <div
+            className="amenities__container"
+            key={`a-${activeSlide}`}
+            style={{ animation: 'softlyFadeIn 0.65s cubic-bezier(0.16,1,0.3,1) both' }}
+          >
             <h3 className="amenities__heading">World-Class Amenities</h3>
             <p className="amenities__subheading">Every detail curated for the way you want to live.</p>
             <div className="amenities__grid">
@@ -163,7 +150,7 @@ export const ProjectDiscovery: React.FC = () => {
           </div>
         </section>
 
-        {/* ── Why Greenkrt (static) ── */}
+        {/* ── 4. Why Greenkrt ────────────────────────────────── */}
         <section className="landing-page__why">
           <div className="why__container">
             <h3 className="why__heading">Why Choose Greenkrt?</h3>
@@ -180,7 +167,7 @@ export const ProjectDiscovery: React.FC = () => {
           </div>
         </section>
 
-        {/* ── Footer ── */}
+        {/* ── 5. Footer ──────────────────────────────────────── */}
         <footer className="landing-page__footer">
           <div className="footer__inner">
             <span className="footer__brand">Greenkrt Integrated Services Pvt. Ltd.</span>
