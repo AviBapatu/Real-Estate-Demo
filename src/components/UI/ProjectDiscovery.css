@@ -1,0 +1,158 @@
+.discovery {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  background: #ffffff;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+}
+
+/* Left Half: Branding */
+.discovery__left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f8fafc; /* Subtle background for the left side */
+  padding: 40px;
+  text-align: center;
+  border-right: 1px solid #e2e8f0;
+  animation: slideInLeft 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.discovery__brand {
+  max-width: 400px;
+}
+
+.discovery__logo {
+  height: 120px;
+  width: auto;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.discovery__logo:hover {
+  transform: scale(1.05);
+}
+
+.discovery__company-name {
+  margin: 0;
+  font-size: 3.5rem;
+  color: #577c1a;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.discovery__tagline {
+  margin: 8px 0 0;
+  font-size: 1.1rem;
+  color: #577c1a;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Right Half: Project Selection */
+.discovery__right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background: #ffffff;
+  animation: slideInRight 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.discovery__selection {
+  width: 100%;
+  max-width: 440px;
+}
+
+.discovery__title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+
+.discovery__projects {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.discovery__project-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px 24px;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+}
+
+.discovery__project-btn:hover {
+  border-color: #577c1a;
+  background: #f0f7e6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(87, 124, 26, 0.1);
+}
+
+.discovery__project-btn-text {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.discovery__project-btn-arrow {
+  color: #577c1a;
+  font-size: 1.25rem;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.2s ease;
+}
+
+.discovery__project-btn:hover .discovery__project-btn-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Animations */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .discovery {
+    flex-direction: column;
+  }
+  .discovery__left {
+    min-height: 40vh;
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .discovery__right {
+    padding: 32px 20px;
+  }
+  .discovery__company-name {
+    font-size: 2.5rem;
+  }
+}

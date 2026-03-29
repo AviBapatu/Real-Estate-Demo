@@ -31,11 +31,19 @@ export const getFeatureCenter = (coords: number[][]): [number, number] => {
  * Smoothly fits the map camera to a polygon's bounding box.
  * Consistent padding and duration across all call sites.
  */
-export const fitBoundsToFeature = (
+export const fitBoundsToFeatures = (
   map: ReturnType<MapRef['getMap']>,
-  coords: number[][]
+  allCoords: number[][][]
 ) => {
-  map.fitBounds(getFeatureBounds(coords), {
+  if (allCoords.length === 0) return;
+  const flatCoords = allCoords.flat();
+  const lngs = flatCoords.map((c) => c[0]);
+  const lats = flatCoords.map((c) => c[1]);
+  const bounds: [[number, number], [number, number]] = [
+    [Math.min(...lngs), Math.min(...lats)],
+    [Math.max(...lngs), Math.max(...lats)],
+  ];
+  map.fitBounds(bounds, {
     padding: 100,
     duration: 1000,
     essential: true,

@@ -7,6 +7,7 @@ export interface PlotProperties {
   size: string;
   features: string[];
   panorama?: string;
+  distanceFromRoad?: string;
 }
 
 export interface SelectedPlot {
@@ -50,6 +51,12 @@ interface MapState {
   // Admin mode
   isAdminMode: boolean;
   setAdminMode: (val: boolean) => void;
+
+  // Landing Page state
+  isLandingPageOpen: boolean;
+  setIsLandingPageOpen: (val: boolean) => void;
+  currentProject: string | null;
+  setCurrentProject: (val: string | null) => void;
 }
 
 export const useMapStore = create<MapState>((set) => ({
@@ -97,4 +104,10 @@ export const useMapStore = create<MapState>((set) => ({
   // Admin mode
   isAdminMode: false,
   setAdminMode: (val) => set({ isAdminMode: val }),
+
+  // Landing Page state
+  isLandingPageOpen: true, // Start with landing page open
+  setIsLandingPageOpen: (val) => set({ isLandingPageOpen: val }),
+  currentProject: null,
+  setCurrentProject: (val) => set({ currentProject: val }),
 }));

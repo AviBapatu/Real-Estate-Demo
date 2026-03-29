@@ -75,15 +75,16 @@
         ]
       },
       "properties": {
-        "id": "test-plot-1",
+        "id": "01",
         "status": "available",
         "price": 72000,
         "size": "1200 sqft",
         "panorama": "/assets/360/sample3.webp",
         "features": [
-          "near-entry",
+          "near entry",
           "corner"
-        ]
+        ],
+        "distanceFromRoad": "17 meters"
       }
     },
     {
@@ -148,15 +149,15 @@
         ]
       },
       "properties": {
-        "id": "test-plot-2",
+        "id": "02",
         "status": "sold",
         "price": 74000,
         "size": "2700 sqft",
         "panorama": "/assets/360/sample11.webp",
         "features": [
-          "park-facing",
-          "premium-view",
-          "near-entry"
+          "park facing",
+          "premium view",
+          "near entry"
         ]
       }
     },
@@ -234,14 +235,15 @@
         ]
       },
       "properties": {
-        "id": "test-plot-3",
+        "id": "03",
         "status": "available",
         "price": 83000,
         "size": "2500 sqft",
         "features": [
           "corner"
         ],
-        "panorama": "/assets/360/sample8.webp"
+        "panorama": "/assets/360/sample8.webp",
+        "distanceFromRoad": "5 meters"
       }
     },
     {
@@ -314,14 +316,14 @@
         ]
       },
       "properties": {
-        "id": "test-plot-4",
+        "id": "04",
         "status": "available",
         "price": 71000,
         "size": "2100 sqft",
         "features": [
-          "corner",
-          "east-facing",
-          "near-entry"
+          "east facing",
+          "near entry",
+          "park facing"
         ],
         "panorama": "/assets/360/sample10.webp"
       }
@@ -396,12 +398,12 @@
         ]
       },
       "properties": {
-        "id": "test-plot-5",
+        "id": "05",
         "status": "sold",
         "price": 60000,
         "size": "2700 sqft",
         "features": [
-          "park-facing"
+          "park facing"
         ],
         "panorama": "/assets/360/sample7.webp"
       }
@@ -480,13 +482,13 @@
         ]
       },
       "properties": {
-        "id": "test-plot-6",
+        "id": "06",
         "status": "available",
         "price": 50000,
         "size": "1700 sqft",
         "features": [
-          "premium-view",
-          "near-entry"
+          "premium view",
+          "near entry"
         ],
         "panorama": "/assets/360/sample2.png"
       }
@@ -589,15 +591,16 @@
         ]
       },
       "properties": {
-        "id": "test-plot-7",
+        "id": "07",
         "status": "available",
         "price": 78000,
         "size": "1200 sqft",
         "features": [
           "corner",
-          "premium-view"
+          "premium view"
         ],
-        "panorama": "/assets/360/sample8.webp"
+        "panorama": "/assets/360/sample8.webp",
+        "distanceFromRoad": "7 meters"
       }
     },
     {
@@ -698,14 +701,14 @@
         ]
       },
       "properties": {
-        "id": "test-plot-8",
+        "id": "08",
         "status": "available",
         "price": 56000,
         "size": "2400 sqft",
         "features": [
-          "east-facing",
-          "near-entry",
-          "park-facing"
+          "east facing",
+          "near entry",
+          "park facing"
         ],
         "panorama": "/assets/360/sample6.webp"
       }
@@ -812,12 +815,12 @@
         ]
       },
       "properties": {
-        "id": "test-plot-9",
+        "id": "09",
         "status": "sold",
         "price": 75000,
         "size": "1900 sqft",
         "features": [
-          "premium-view"
+          "premium view"
         ],
         "panorama": "/assets/360/sample12.webp"
       }
@@ -904,12 +907,12 @@
         ]
       },
       "properties": {
-        "id": "test-plot-10",
+        "id": "10",
         "status": "sold",
         "price": 76000,
         "size": "1600 sqft",
         "features": [
-          "near-entry"
+          "near entry"
         ],
         "panorama": "/assets/360/sample9.webp"
       }
@@ -1020,12 +1023,12 @@
         ]
       },
       "properties": {
-        "id": "test-plot-10",
+        "id": "10",
         "status": "sold",
         "price": 54000,
         "size": "2600 sqft",
         "features": [
-          "premium-view"
+          "premium view"
         ],
         "panorama": "/assets/360/sample10.webp"
       }
@@ -1088,15 +1091,16 @@
         ]
       },
       "properties": {
-        "id": "test-plot-11",
+        "id": "11",
         "status": "available",
         "price": 82000,
         "size": "2000 sqft",
         "features": [
-          "park-facing",
+          "park facing",
           "corner"
         ],
-        "panorama": "/assets/360/sample3.webp"
+        "panorama": "/assets/360/sample3.webp",
+        "distanceFromRoad": "16 meters"
       }
     },
     {
@@ -1129,16 +1133,17 @@
         ]
       },
       "properties": {
-        "id": "test-plot-12",
+        "id": "12",
         "status": "sold",
         "price": 56000,
         "size": "2600 sqft",
         "features": [
-          "park-facing",
-          "premium-view",
+          "park facing",
+          "premium view",
           "corner"
         ],
-        "panorama": "/assets/360/sample3.webp"
+        "panorama": "/assets/360/sample3.webp",
+        "distanceFromRoad": "6 meters"
       }
     },
     {
@@ -1203,14 +1208,14 @@
         ]
       },
       "properties": {
-        "id": "test-plot-13",
+        "id": "13",
         "status": "sold",
         "price": 73000,
         "size": "1700 sqft",
         "features": [
-          "park-facing",
-          "premium-view",
-          "near-entry"
+          "park facing",
+          "premium view",
+          "near entry"
         ],
         "panorama": "/assets/360/sample2.png"
       }
@@ -1313,14 +1318,14 @@
         ]
       },
       "properties": {
-        "id": "test-plot-14",
+        "id": "14",
         "status": "sold",
         "price": 59000,
         "size": "2200 sqft",
         "features": [
-          "park-facing",
-          "near-entry",
-          "east-facing"
+          "park facing",
+          "near entry",
+          "east facing"
         ],
         "panorama": "/assets/360/sample4.webp"
       }
@@ -1419,12 +1424,12 @@
         ]
       },
       "properties": {
-        "id": "test-plot-15",
+        "id": "15",
         "status": "sold",
         "price": 83000,
         "size": "1600 sqft",
         "features": [
-          "east-facing"
+          "east facing"
         ],
         "panorama": "/assets/360/sample11.webp"
       }
@@ -1523,13 +1528,13 @@
         ]
       },
       "properties": {
-        "id": "test-plot-16",
+        "id": "16",
         "status": "available",
         "price": 79000,
         "size": "2600 sqft",
         "features": [
-          "park-facing",
-          "near-entry"
+          "park facing",
+          "near entry"
         ],
         "panorama": "/assets/360/sample11.webp"
       }
@@ -1624,13 +1629,13 @@
         ]
       },
       "properties": {
-        "id": "test-plot-17",
+        "id": "17",
         "status": "available",
         "price": 65000,
         "size": "2100 sqft",
         "features": [
-          "park-facing",
-          "east-facing"
+          "park facing",
+          "east facing"
         ],
         "panorama": "/assets/360/sample13.webp"
       }
@@ -1669,13 +1674,13 @@
         ]
       },
       "properties": {
-        "id": "test-plot-18",
+        "id": "18",
         "status": "sold",
         "price": 59000,
         "size": "1200 sqft",
         "features": [
-          "premium-view",
-          "east-facing"
+          "premium view",
+          "east facing"
         ],
         "panorama": "/assets/360/sample3.webp"
       }
@@ -1734,12 +1739,12 @@
         ]
       },
       "properties": {
-        "id": "test-plot-19",
+        "id": "19",
         "status": "available",
         "price": 67000,
         "size": "2800 sqft",
         "features": [
-          "east-facing"
+          "east facing"
         ],
         "panorama": "/assets/360/sample9.webp"
       }
@@ -1826,16 +1831,17 @@
         ]
       },
       "properties": {
-        "id": "test-plot-20",
+        "id": "20",
         "status": "sold",
         "price": 58000,
         "size": "1800 sqft",
         "features": [
-          "east-facing",
-          "park-facing",
+          "east facing",
+          "park facing",
           "corner"
         ],
-        "panorama": "/assets/360/sample2.png"
+        "panorama": "/assets/360/sample2.png",
+        "distanceFromRoad": "16 meters"
       }
     },
     {
@@ -1940,12 +1946,12 @@
         ]
       },
       "properties": {
-        "id": "test-plot-21",
+        "id": "21",
         "status": "sold",
         "price": 50000,
         "size": "2700 sqft",
         "features": [
-          "near-entry"
+          "near entry"
         ],
         "panorama": "/assets/360/sample7.webp"
       }
@@ -2040,15 +2046,16 @@
         ]
       },
       "properties": {
-        "id": "test-plot-22",
+        "id": "22",
         "status": "sold",
         "price": 74000,
         "size": "1300 sqft",
         "features": [
           "corner",
-          "park-facing"
+          "park facing"
         ],
-        "panorama": "/assets/360/sample1.webp"
+        "panorama": "/assets/360/sample1.webp",
+        "distanceFromRoad": "5 meters"
       }
     },
     {
@@ -2117,13 +2124,13 @@
         ]
       },
       "properties": {
-        "id": "test-plot-23",
+        "id": "23",
         "status": "sold",
         "price": 49000,
         "size": "1600 sqft",
         "features": [
-          "premium-view",
-          "east-facing"
+          "premium view",
+          "east facing"
         ],
         "panorama": "/assets/360/sample6.webp"
       }
@@ -2158,16 +2165,17 @@
         ]
       },
       "properties": {
-        "id": "test-plot-24",
+        "id": "24",
         "status": "available",
         "price": 63000,
         "size": "2000 sqft",
         "features": [
-          "near-entry",
-          "premium-view",
+          "near entry",
+          "premium view",
           "corner"
         ],
-        "panorama": "/assets/360/sample5.webp"
+        "panorama": "/assets/360/sample5.webp",
+        "distanceFromRoad": "12 meters"
       }
     },
     {
@@ -2204,12 +2212,12 @@
         ]
       },
       "properties": {
-        "id": "test-plot-25",
+        "id": "25",
         "status": "available",
         "price": 85000,
         "size": "2600 sqft",
         "features": [
-          "east-facing"
+          "east facing"
         ],
         "panorama": "/assets/360/sample5.webp"
       }
@@ -2244,14 +2252,14 @@
         ]
       },
       "properties": {
-        "id": "test-plot-26",
+        "id": "26",
         "status": "available",
         "price": 50000,
         "size": "2400 sqft",
         "features": [
-          "premium-view",
-          "near-entry",
-          "east-facing"
+          "premium view",
+          "near entry",
+          "east facing"
         ],
         "panorama": "/assets/360/sample7.webp"
       }
@@ -2286,13 +2294,13 @@
         ]
       },
       "properties": {
-        "id": "test-plot-27",
+        "id": "27",
         "status": "available",
         "price": 82000,
         "size": "1900 sqft",
         "features": [
-          "park-facing",
-          "near-entry"
+          "park facing",
+          "near entry"
         ],
         "panorama": "/assets/360/sample8.webp"
       }
@@ -2327,13 +2335,13 @@
         ]
       },
       "properties": {
-        "id": "test-plot-28",
+        "id": "28",
         "status": "sold",
         "price": 69000,
         "size": "2700 sqft",
         "features": [
-          "east-facing",
-          "park-facing"
+          "east facing",
+          "park facing"
         ],
         "panorama": "/assets/360/sample3.webp"
       }
@@ -2368,16 +2376,17 @@
         ]
       },
       "properties": {
-        "id": "test-plot-29",
+        "id": "29",
         "status": "available",
         "price": 83000,
         "size": "2800 sqft",
         "features": [
-          "near-entry",
+          "near entry",
           "corner",
-          "park-facing"
+          "park facing"
         ],
-        "panorama": "/assets/360/sample3.webp"
+        "panorama": "/assets/360/sample3.webp",
+        "distanceFromRoad": "8 meters"
       }
     },
     {
@@ -2410,12 +2419,12 @@
         ]
       },
       "properties": {
-        "id": "test-plot-30",
+        "id": "30",
         "status": "sold",
         "price": 47000,
         "size": "2100 sqft",
         "features": [
-          "park-facing"
+          "park facing"
         ],
         "panorama": "/assets/360/sample10.webp"
       }
@@ -2462,14 +2471,14 @@
         ]
       },
       "properties": {
-        "id": "test-plot-31",
+        "id": "31",
         "status": "available",
         "price": 62000,
         "size": "2800 sqft",
         "features": [
-          "east-facing",
-          "premium-view",
-          "near-entry"
+          "east facing",
+          "premium view",
+          "near entry"
         ],
         "panorama": "/assets/360/sample8.webp"
       }
@@ -2508,15 +2517,16 @@
         ]
       },
       "properties": {
-        "id": "test-plot-32",
+        "id": "32",
         "status": "available",
         "price": 69000,
         "size": "2000 sqft",
         "features": [
-          "premium-view",
+          "premium view",
           "corner"
         ],
-        "panorama": "/assets/360/sample9.webp"
+        "panorama": "/assets/360/sample9.webp",
+        "distanceFromRoad": "5 meters"
       }
     },
     {
@@ -2609,14 +2619,14 @@
         ]
       },
       "properties": {
-        "id": "test-plot-33",
+        "id": "33",
         "status": "available",
         "price": 74000,
         "size": "2600 sqft",
         "features": [
-          "premium-view",
-          "near-entry",
-          "east-facing"
+          "premium view",
+          "near entry",
+          "east facing"
         ],
         "panorama": "/assets/360/sample8.webp"
       }

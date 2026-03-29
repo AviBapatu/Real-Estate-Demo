@@ -59,6 +59,20 @@ export const Sidebar = () => {
               <dd>{props?.id ?? '—'}</dd>
             </div>
           </dl>
+          {props?.distanceFromRoad && (
+            <div className="sidebar__highlight-box">
+              <div className="sidebar__highlight-header">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M11 18l-2-1-2 1V6l2 1 2-1 2 1 2-1v12l-2 1-2-1z" />
+                </svg>
+                <span>Corner Plot Detail</span>
+              </div>
+              <div className="sidebar__highlight-row">
+                <dt>Distance to Road</dt>
+                <dd>{props.distanceFromRoad}</dd>
+              </div>
+            </div>
+          )}
         </section>
 
         <div className="sidebar__divider" />
@@ -70,7 +84,7 @@ export const Sidebar = () => {
               {props.features.map((feature) => (
                 <li key={feature} className="sidebar__feature-chip">
                   <span className="sidebar__feature-dot" />
-                  {feature.replace(/-/g, ' ')}
+                  {feature}
                 </li>
               ))}
             </ul>

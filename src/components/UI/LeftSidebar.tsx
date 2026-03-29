@@ -3,11 +3,11 @@ import './LeftSidebar.css';
 
 const ALL_FEATURES = [
   'corner',
-  'east-facing',
-  'north-facing',
-  'park-facing',
-  'premium-view',
-  'near-entry'
+  'east facing',
+  'north facing',
+  'park facing',
+  'premium view',
+  'near entry'
 ];
 
 export const LeftSidebar = () => {
@@ -121,7 +121,7 @@ export const LeftSidebar = () => {
                   onChange={(e) => setFilterFeature(feat, e.target.checked)}
                   className="left-sidebar__checkbox"
                 />
-                <span className="left-sidebar__feature-text">{feat.replace(/-/g, ' ')}</span>
+                <span className="left-sidebar__feature-text">{feat}</span>
               </label>
             ))}
           </div>

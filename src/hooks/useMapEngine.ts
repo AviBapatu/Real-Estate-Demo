@@ -1,7 +1,7 @@
 import { useRef, useEffect, useCallback } from 'react';
 import type { MapRef, MapLayerMouseEvent } from 'react-map-gl/maplibre';
 import { useMapStore } from '../store/useMapStore';
-import { fitBoundsToFeature, getFeatureCenter } from '../utils/mapUtils';
+import { fitBoundsToFeatures, getFeatureCenter } from '../utils/mapUtils';
 import plotData from '../data/plots.json';
 
 /**
@@ -45,7 +45,10 @@ export const useMapEngine = (mapRef: React.RefObject<MapRef | null>) => {
       // 1. Navbar Search Query
       if (query) {
         let matchQuery = false;
-        if (searchFilter === 'id' && props.id) matchQuery = props.id.toLowerCase().includes(query);
+        if (searchFilter === 'id' && props.id) {
+          const normalizedQuery = query.length === 1 ? query.padStart(2, '0') : query;
+          matchQuery = props.id.toLowerCase() === normalizedQuery;
+        }
         else if (searchFilter === 'size' && props.size) matchQuery = props.size.toLowerCase().includes(query);
         else if (searchFilter === 'features' && props.features) matchQuery = props.features.some((f: string) => f.toLowerCase().includes(query));
         if (!matchQuery) return false;
@@ -90,9 +93,10 @@ export const useMapEngine = (mapRef: React.RefObject<MapRef | null>) => {
       );
     });
 
-    // "Teleport" effect: single match → fly to it immediately
-    if (query && matchedFeatures.length === 1) {
-      fitBoundsToFeature(map, matchedFeatures[0].geometry.coordinates[0]);
+    // "Teleport" effect: fit bounds to ALL matched plots
+    if (query && matchedFeatures.length > 0) {
+      const allCoords = matchedFeatures.map(f => (f as any).geometry.coordinates[0]);
+      fitBoundsToFeatures(map, allCoords);
     }
   }, [searchQuery, searchFilter, filterMinSize, filterMaxSize, filterMinPrice, filterMaxPrice, filterFeatures, mapRef]);
 
@@ -150,7 +154,7 @@ export const useMapEngine = (mapRef: React.RefObject<MapRef | null>) => {
           coordinates: [centerLng, centerLat],
         });
 
-        if (map) fitBoundsToFeature(map, coords);
+        if (map) fitBoundsToFeatures(map, [coords]);
       }
       return;
     }
