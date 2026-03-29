@@ -1,4 +1,4 @@
-import { Routes, Route, useParams, Navigate } from 'react-router-dom';
+import { Routes, Route, useParams, Navigate, useLocation } from 'react-router-dom';
 import { useMapStore } from './store/useMapStore';
 import { ProjectDiscovery } from './components/UI/ProjectDiscovery';
 import { MapView } from './components/Map/MapView';
@@ -37,15 +37,18 @@ function MapLayout() {
 function App() {
   const isAppLoading = useMapStore((state) => state.isAppLoading);
   const setAppLoading = useMapStore((state) => state.setAppLoading);
+  const location = useLocation();
 
   useEffect(() => {
-    if (isAppLoading) {
+    // Only auto-dismiss the splash screen if we are on the homepage
+    // MapView has its own native onLoad trigger to dismiss the screen!
+    if (isAppLoading && location.pathname === '/') {
       const timer = setTimeout(() => {
         setAppLoading(false);
       }, 2000);
       return () => clearTimeout(timer);
     }
-  }, [isAppLoading, setAppLoading]);
+  }, [isAppLoading, setAppLoading, location.pathname]);
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>

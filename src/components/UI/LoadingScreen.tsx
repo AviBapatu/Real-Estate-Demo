@@ -13,7 +13,7 @@ export const LoadingScreen = () => {
       alignItems: 'center',
       backgroundColor: '#ffffff',
       opacity: isAppLoading ? 1 : 0,
-      transition: 'opacity 0.8s ease-out',
+      transition: 'opacity 0.3s ease-out',
       pointerEvents: isAppLoading ? 'all' : 'none'
     }}>
       <div style={{ 

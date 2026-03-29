@@ -10,15 +10,13 @@ export const ProjectDiscovery: React.FC = () => {
   const handleProjectSelect = (project: string) => {
     // 1. Show the loading screen with logo
     setAppLoading(true);
-    
-    // 2. Set the current project context
     setCurrentProject(project);
 
-    // 3. After a short delay, switch to the map view route
-    // The loading screen will stay visible until MapView calls setAppLoading(false)
+    // 3. Give 300ms for the loading screen's opacity transition to completely finish masking the browser
+    // Then mount the heavy map route so it doesn't freeze the CSS animation while starting WebGL
     setTimeout(() => {
       navigate('/project/' + encodeURIComponent(project));
-    }, 1500);
+    }, 300);
   };
 
   return (
