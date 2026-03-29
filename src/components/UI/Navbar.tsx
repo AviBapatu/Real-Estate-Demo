@@ -1,7 +1,9 @@
 import { useMapStore } from '../../store/useMapStore';
+import { useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {
   const { searchQuery, setSearchQuery, searchFilter, setSearchFilter, isAdminMode, setAdminMode } = useMapStore();
+  const navigate = useNavigate();
 
   const getPlaceholderText = () => {
     switch (searchFilter) {
@@ -28,7 +30,11 @@ export const Navbar = () => {
     }}>
       
       {/* Brand */}
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <div 
+        onClick={() => navigate('/')}
+        title="Back to Projects"
+        style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }}
+      >
         <img 
           src="/assets/logo.jpeg" 
           alt="Greenkrt Logo" 

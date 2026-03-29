@@ -47,8 +47,12 @@ function buildGeoJSON(ring: LngLat[]): GeoJSON.FeatureCollection {
 }
 
 function setDotsVisibility(map: maplibregl.Map, visible: boolean) {
-  if (map.getLayer(PREVIEW_POINTS_LAYER)) {
-    map.setLayoutProperty(PREVIEW_POINTS_LAYER, 'visibility', visible ? 'visible' : 'none');
+  try {
+    if (map.getLayer(PREVIEW_POINTS_LAYER)) {
+      map.setLayoutProperty(PREVIEW_POINTS_LAYER, 'visibility', visible ? 'visible' : 'none');
+    }
+  } catch (e) {
+    // Map style already removed, ignore
   }
 }
 
@@ -106,15 +110,23 @@ export const PlotDigitizer = ({ mapRef }: PlotDigitizerProps) => {
   }, []);
 
   const removeSourceAndLayers = useCallback((map: maplibregl.Map) => {
-    [PREVIEW_POINTS_LAYER, PREVIEW_LINE_LAYER, PREVIEW_FILL_LAYER].forEach((id) => {
-      if (map.getLayer(id)) map.removeLayer(id);
-    });
-    if (map.getSource(PREVIEW_SOURCE)) map.removeSource(PREVIEW_SOURCE);
+    try {
+      [PREVIEW_POINTS_LAYER, PREVIEW_LINE_LAYER, PREVIEW_FILL_LAYER].forEach((id) => {
+        if (map.getLayer(id)) map.removeLayer(id);
+      });
+      if (map.getSource(PREVIEW_SOURCE)) map.removeSource(PREVIEW_SOURCE);
+    } catch (e) {
+      // Map style already removed during unmount
+    }
   }, []);
 
   const updatePreview = useCallback((map: maplibregl.Map) => {
-    const src = map.getSource(PREVIEW_SOURCE) as maplibregl.GeoJSONSource | undefined;
-    src?.setData(buildGeoJSON(ring.current));
+    try {
+      const src = map.getSource(PREVIEW_SOURCE) as maplibregl.GeoJSONSource | undefined;
+      src?.setData(buildGeoJSON(ring.current));
+    } catch (e) {
+      // Ignore if source missing or style removed
+    }
   }, []);
 
   // ── Drawing logic ───────────────────────────────────────────────────────
@@ -141,12 +153,16 @@ export const PlotDigitizer = ({ mapRef }: PlotDigitizerProps) => {
     ring.current = [];
     setIsDrawing(false);
 
-    // Clear preview and hide dots
-    const src = map.getSource(PREVIEW_SOURCE) as maplibregl.GeoJSONSource | undefined;
-    src?.setData(EMPTY_FC);
-    setDotsVisibility(map, false);
+    try {
+      // Clear preview and hide dots
+      const src = map.getSource(PREVIEW_SOURCE) as maplibregl.GeoJSONSource | undefined;
+      src?.setData(EMPTY_FC);
+      setDotsVisibility(map, false);
 
-    map.getCanvas().style.cursor = '';
+      map.getCanvas().style.cursor = '';
+    } catch (e) {
+      // Map may be unmounting, ignore
+    }
   }, [mapRef]);
 
   const finishPolygon = useCallback((_map: maplibregl.Map) => {

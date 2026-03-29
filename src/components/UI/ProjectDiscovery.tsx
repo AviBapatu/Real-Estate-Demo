@@ -1,21 +1,23 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMapStore } from '../../store/useMapStore';
 import './ProjectDiscovery.css';
 
 export const ProjectDiscovery: React.FC = () => {
-  const { setAppLoading, setIsLandingPageOpen, setCurrentProject } = useMapStore();
+  const { setAppLoading, setCurrentProject } = useMapStore();
+  const navigate = useNavigate();
 
   const handleProjectSelect = (project: string) => {
     // 1. Show the loading screen with logo
     setAppLoading(true);
     
-    // 2. Set the current project
+    // 2. Set the current project context
     setCurrentProject(project);
 
-    // 3. After a short delay, switch to the map view
+    // 3. After a short delay, switch to the map view route
     // The loading screen will stay visible until MapView calls setAppLoading(false)
     setTimeout(() => {
-      setIsLandingPageOpen(false);
+      navigate('/project/' + encodeURIComponent(project));
     }, 1500);
   };
 

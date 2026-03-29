@@ -63,6 +63,7 @@ export const MapView = () => {
   return (
     <Map
       ref={mapRef}
+      reuseMaps
       initialViewState={INITIAL_VIEW_STATE}
       mapStyle={STABLE_MAP_STYLE}
       style={{ width: '100%', height: '100%', backgroundColor: '#ffffff' }}
